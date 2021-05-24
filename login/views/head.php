@@ -1,15 +1,14 @@
 <?php
-require_once "../../config/config.php";
-$oConfig=new config();
+// require_once "../../config/config.php";
+require_once '../../controllers/mensajeController.php';
+
+// $oConfig=new config();
     session_start();
     // echo $_SESSION['idUser'];
     if($requiereSesion and !isset($_SESSION['idUser'])){
-        echo "requiere iniciar";
-        header("Location: ../config/login.php");
-        
+        // echo "requiere iniciar";
+        header("Location: ../../views/user/login.php");
     }
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +31,10 @@ $oConfig=new config();
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center"> -->
     <!-- <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60"> -->
-    <p class="animation__shake">Cargando modulos...</p>
-  </div>
+    <!-- <p class="animation__shake">Cargando modulos...</p>
+  </div> -->
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -44,9 +43,9 @@ $oConfig=new config();
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="../home/index.php" class="nav-link">Inicio</a>
-      </li>
+      </li> -->
       <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li> -->
@@ -70,7 +69,7 @@ $oConfig=new config();
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> -->
         <div class="info">
-          <a href="../config/user.php" class="d-block"><?php echo $_SESSION["nameUser"]; ?></a>
+          <a href="../user/user.php" class="d-block"><?php echo $_SESSION["nameUser"]; ?></a>
           <a href="../../controllers/userController.php?funcion=cerrarSesion">Cerrar Sesión</a>
         </div>
       </div>
@@ -91,11 +90,32 @@ $oConfig=new config();
               <li class="nav-item">
                 <a href="../home/index.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard</p>
+                  <p>Pagina Inicial</p>
                 </a>
                 <a href="../home/acercaDe.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Acerca de</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="fas fa-users-cog"></i>
+              <p>
+                Configuración Usuario
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../user/user.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Perfil</p>
+                </a>
+                <a href="../user/listaRoles.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista Roles</p>
                 </a>
               </li>
             </ul>
@@ -106,4 +126,8 @@ $oConfig=new config();
     <!-- /.sidebar -->
   </aside>
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<br>
+<div class="container-fluid">
+  <div class="content-wrapper">
+    <div class="box">
+      <div class="box-body">

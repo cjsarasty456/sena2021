@@ -11,21 +11,7 @@ state: Developing
 */
 
 require_once 'conexiondb.php';
-
-    // //clase que contiene los atribtos de la tabla rol
-    // class modelRole{
-    //     private $idRole="";
-    //     private $nameRole="";
-    //     private $eliminate="";
-    // }
-    // //clase que contiene los atributos de la tabla permisos
-    // class modelPermission{
-    //     private $idRol="";
-    //     private $idModule="";
-    //     private $idPage="";
-    // }
-
-//clase  que contiene los atributos del usuario
+//clase  que contiene los atributos del usuario y funciones del usuario
     class user extends conexiondb{
 
         private $idUser="";
@@ -65,7 +51,7 @@ require_once 'conexiondb.php';
             $md5Password=md5($password);
             //consulta para retornar un solo registro
             $sql="INSERT INTO usuario (nombre,correoElectronico,contrasena,resetContrasena,idRol,eliminado)
-            VALUE ('$name','$email','$md5Password',0,2,0)";
+            VALUE ('$name','$email','$md5Password',0,NULL,false)";
             //se ejecuta la consulta
             $result=mysqli_query($this->getConexion(),$sql);
             return $result;
@@ -86,5 +72,4 @@ require_once 'conexiondb.php';
             return $result;
         }
     }
-
 ?>
