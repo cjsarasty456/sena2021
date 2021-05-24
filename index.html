@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi primer página web</title>
+</head>
+<body>
+    <h1>Hola mundo</h1>
+    <h5>ADSI</h5>
+    <input class="form-control" id="nota3" type="text" onchange="calcularPromedio();" type="text">
+    <input id="respuesta" type="text">
+</body>
+</html>
+<script>
+
+function desencriptar(){
+    let ingresar=document.getElementById("nota3").value;
+    let retorno;
+
+    for(i=0;i<ingresar.le)
+}
+
+    function calcularPromedio(){
+    let ingresar=document.getElementById("nota3").value;
+    let retorno;
+    switch (ingresar){
+        case "Z":retorno="A"; break;
+
+        case "W":retorno="B"; break;
+        case "E":retorno="C"; break;
+        case "R":retorno="D"; break;
+
+        case "T":retorno="E"; break;
+        case "Y":retorno="F"; break;
+        case "U":retorno="G"; break;
+        case "L":retorno="H"; break;
+        case "O":retorno="I"; break;
+        case "A":retorno="J"; break;
+        case "S":retorno="K"; break;
+        case "D":retorno="L"; break;
+        case "V":retorno="M"; break;
+        case "G":retorno="N"; break;
+        case "H":retorno="O"; break;
+        case "J":retorno="P"; break;
+        case "I":retorno="Q"; break;
+        case "P":retorno="R"; break;
+        case "Q":retorno="S"; break;
+        case "X":retorno="T"; break;
+        case "C":retorno="U"; break;
+        case "F":retorno="V"; break;
+        case "B":retorno="W"; break;
+        case "N":retorno="X"; break;
+        case "M":retorno="Y"; break;
+        case "K":retorno="Z"; break;
+
+
+    }
+    document.getElementById("respuesta").value=retorno;
+
+    }
+
+</script>
