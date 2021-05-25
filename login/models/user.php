@@ -71,5 +71,6 @@ require_once 'conexiondb.php';
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
             return $result;
         }
+
     }
 ?>

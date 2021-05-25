@@ -12,7 +12,10 @@ state: Developing
 
 */
 if(file_exists("../../controllers/mensajeController.php"))
+{
 require_once '../../controllers/mensajeController.php';
+require_once '../../config/config.php';
+}
 $oUser=new userController();
 $funcion="";
 if(isset($_POST['funcion'])){
@@ -45,7 +48,6 @@ switch($funcion){
 }
 
 class userController {
-
 
     public function login($email,$password){
         require_once '../../models/user.php';
@@ -84,27 +86,65 @@ class userController {
             //se indica que se registró correctamente y se redirije al login
             else header("Location: ../../views/user/login.php?mensaje=se registró correctamente");
         }
-        
     }
-
     public function logOut(){
+        //se inicia sesión
         session_start();
+        //se eliminan las variables de la sesión
         session_unset();
+        //se destruyel a sesión
         session_destroy();
         header("Location: ../");
     }
-
+    public function detalleRol($idRol){
+        //se agrega la referencia del modelo de base datos Rol
+        require_once '../../models/rol.php';
+        //se instancia el objeto Rol
+        $oRol=new rol();
+        //se asigna el valor en el atributo idRol que se recibe por el parametro
+        $oRol->idRol=$idRol;
+        //se consulta la información del Rol
+        $oRol->ConsultarRolId();
+        //se retorna el objeto del rol con la información del rol
+        return $oRol;
+    }
+    //función para consultar la lista de Rol 
     public function ListaRoles(){
         require_once '../../models/rol.php';
         $oRol=new rol();
         return $oRol->ConsultarListaRoles();
     }
+    //Función para registrar el rol nuevo o editar
+    //incompleta
     public function registrarRol(){
         require_once '../../models/rol.php';          
         $oRol=new rol();
-        $oRol->id=$_POST['idRol'];
+        $oRol->idRol=$_POST['idRol'];
         $oRol->nombreRol=$_POST['nombreRol'];
-        return $oRol->registrarRol();
+        $oMensaje=new mensaje();
+        if($oRol->registrarRol())
+        {
+            $tituloMensaje="Excelente";
+            $tipoMensaje=$oMensaje->tipoCorrecto;
+            $mensaje="usuario o contraseña incorrecto";
+            $host  = $_SERVER['HTTP_HOST'];
+            $url=urlRaiz."/view/user/detalleRol";
+            header("Location: $url");
+            // header("Location: ../../views/user/detalleRol.php?idRol=$oRol->idRol&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+        }
+        else{
+            $tituloMensaje="Error";
+            $tipoMensjae=$oMensaje->tipoPeligo;
+            $mensaje="Error al guardar el Rol";
+        header("Location: ../../views/user/detalleRol.php?idRol=$oRol->idRol&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensjae&mensaje=$mensaje");
+        }
+        // return ;
+    }
+    //función para retornar los usuario relacionados con un rol
+    public function ObtenerUsuariosRol($idRol){
+        require_once '../../models/rol.php';          
+        $oRol=new rol();
+        return $oRol->ObtenerUsuariosRol($idRol);
     }
 }
 

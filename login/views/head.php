@@ -103,7 +103,7 @@ require_once '../../controllers/mensajeController.php';
             <a href="#" class="nav-link">
             <i class="fas fa-users-cog"></i>
               <p>
-                Configuración Usuario
+                Configuración
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -115,7 +115,11 @@ require_once '../../controllers/mensajeController.php';
                 </a>
                 <a href="../user/listaRoles.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Lista Roles</p>
+                  <p>Roles</p>
+                </a>
+                <a href="../user/listaModulo.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Modulos</p>
                 </a>
               </li>
             </ul>

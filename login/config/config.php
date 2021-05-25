@@ -1,10 +1,8 @@
 <?php
 
-class config{
 
-    public const urlRaiz="http://localhost/sena/login/";
-    
-}
+    define("urlRaiz","/localhost/sena/login/");
+
 
 
 ?>

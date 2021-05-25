@@ -7,7 +7,7 @@ require_once '../head.php';
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Lista Roles</h1>
+                    <h1 class="m-0">Modulos</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
