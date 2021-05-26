@@ -8,7 +8,7 @@ description: clase que contiene los atributos y funciones para la gestión
 de usuarios de la aplicación y comunicación con la base de datos
 state: Developing
 
-*/
+*/  
 
 require_once 'conexiondb.php';
 //clase  que contiene los atributos del usuario y funciones del usuario

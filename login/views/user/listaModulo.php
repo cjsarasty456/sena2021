@@ -17,8 +17,8 @@ require_once '../head.php';
     <!-- etiqueta el encabezado de la tabla -->
     <thead>
         <tr>
-            <th>Rol</th>
-            <th><a class="btn btn-success" href="NuevoRol.php"><i class="far fa-plus-square"></i> Añadir</a></th>
+            <th>Nombre Modulo</th>
+            <th><a class="btn btn-success" href="NuevoModulo.php"><i class="far fa-plus-square"></i> Añadir</a></th>
         </tr>
     </thead>
     <tbody>
@@ -28,15 +28,15 @@ require_once '../head.php';
         //se instancia el objeto del controlador
         $ouserController=new userController();
         //se llama la función listaRoles para almacenar los registros dentro de la variable $Consulta
-        $Consulta=$ouserController->ListaRoles();
+        $Consulta=$ouserController->ConsultarListaModulos();
         foreach($Consulta as $registro){
             ?>
             <tr>
-                <td><?php echo $registro['nombreRol']; ?></td>
+                <td><?php echo $registro['nombreModulo']; ?></td>
                 <td>
-                    <a href="detalleRol.php?idRol=<?php echo $registro['idRol']; ?>" class="btn btn-info"><i class="far fa-eye"></i></a>
-                    <!-- <a href="edi.php?id=<?php echo $registro['idRol']; ?>" class="btn btn-warning"><i class="far fa-edit"></i></a> -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick="eliminar(<?php echo $registro['idRol'];?>);">
+                    <a href="detalleRol.php?idModulo=<?php echo $registro['idModulo']; ?>" class="btn btn-info"><i class="far fa-eye"></i></a>
+                    <!-- <a href="edi.php?id=<?php echo $registro['idModulo']; ?>" class="btn btn-warning"><i class="far fa-edit"></i></a> -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick="eliminar(<?php echo $registro['idModulo'];?>);">
                         <i class="fas fa-trash"></i> 
                     </button>
                 </td>
@@ -44,9 +44,16 @@ require_once '../head.php';
             <?php
         }
         ?>
+       
     </tbody>
 </table>
-
+<?php
+if(Count($Consulta)==0){
+            ?>
+                <h4>No se encontrarón resultados</h4>
+            <?php
+        }
+        ?>
 
 <?php
 $requiereSesion=true;

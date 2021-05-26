@@ -1,7 +1,7 @@
 <?php
 
 
-    define("urlRaiz","/localhost/sena/login/");
+    define("urlRaiz", $_SERVER['DOCUMENT_ROOT'].'/');
 
 
 

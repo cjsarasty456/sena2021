@@ -9,22 +9,22 @@ require_once '../head.php';
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Crear Rol</h1>
+                    <h1 class="m-0">Crear Modulo</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- contenido de la pagina -->
-    <form action="../../controllers/userController.php" method="post">
+    <form action="../../controllers/UserController.php" method="post">
         <div class="row">
             <div class="col">
-                <label for="">Nombre Rol</label>
-                <input type="hidden" name="idRol">
-                <input class="form-control" name="nombreRol" type="text" minlength="6" placeholder="Ingrese el nombre del Rol">
+                <label for="">Nombre Modulo</label>
+                <input type="hidden" name="idModulo">
+                <input class="form-control" name="nombreModulo" type="text" minlength="6" placeholder="Ingrese el nombre del Modulo">
             </div>
         </div>
         <br>
-        <button class="btn btn-success" type="submit" name="funcion" value="registrarRol"><i class="far fa-save"></i> Guardar</button>
+        <button class="btn btn-success" type="submit" name="funcion" value="registrarModulo"><i class="far fa-save"></i> Guardar</button>
     </form>
 <?php
 $requiereSesion=true;

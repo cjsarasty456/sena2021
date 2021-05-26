@@ -45,7 +45,7 @@ require_once "../../config/config.php";
             echo $oMensaje->mostrarMensaje($tituloMensaje,$tipoMensaje,$mensaje);
           }
         ?></p>
-      <form action="" method="post">
+      <form action="../../controllers/userController.php" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" placeholder="Correo electronico" required>
           <div class="input-group-append">

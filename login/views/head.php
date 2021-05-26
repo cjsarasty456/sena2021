@@ -8,6 +8,7 @@ require_once '../../controllers/mensajeController.php';
     if($requiereSesion and !isset($_SESSION['idUser'])){
         // echo "requiere iniciar";
         header("Location: ../../views/user/login.php");
+        die();
     }
 ?>
 
@@ -69,8 +70,10 @@ require_once '../../controllers/mensajeController.php';
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> -->
         <div class="info">
-          <a href="../user/user.php" class="d-block"><?php echo $_SESSION["nameUser"]; ?></a>
-          <a href="../../controllers/userController.php?funcion=cerrarSesion">Cerrar Sesión</a>
+          <!-- <?php if(isset($_SESSION["nameUser"])){ ?>
+            <a href="../user/user.php" class="d-block"><?php echo $_SESSION["nameUser"]; ?></a>
+            <a href="../../controllers/userController.php?funcion=cerrarSesion">Cerrar Sesión</a>
+          <?php } ?> -->
         </div>
       </div>
       <!-- Sidebar Menu -->

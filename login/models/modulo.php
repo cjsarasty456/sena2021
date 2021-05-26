@@ -10,7 +10,7 @@ state: Developing
 
 */
         // //clase que contiene los atribtos de la tabla modulo
-class rol extends conexiondb{
+class modulo extends conexiondb{
     
 
         public $idModulo="";
@@ -20,7 +20,7 @@ class rol extends conexiondb{
     //función que consulta los modulos registrados
         public function ConsultarListaModulo(){
             //consulta para traer la información de los roles
-            $sql="SELECT * FROM modulo";
+            $sql="SELECT * FROM modulo WHERE eliminado=0";
             //se ejecuta la consulta
             $result=mysqli_query($this->getConexion(),$sql);
             //se organiza el resultado de la consulta en un arreglo asociativo para buscar usando como indice el nombre de cada campo
@@ -29,9 +29,9 @@ class rol extends conexiondb{
             return $result;
         }
 
-            función que consulta del rol por el idRol
+            //función que consulta del Modulo por el idModulo
             public function ConsultarModuloId(){
-                //consulta para traer la información de los roles
+                //consulta para traer la información de los Modulo
                 $sql="SELECT * FROM modulo WHERE idModulo=$this->idModulo";
                 //se ejecuta la consulta
                 $result=mysqli_query($this->getConexion(),$sql);
@@ -43,10 +43,10 @@ class rol extends conexiondb{
                 }
             }
 
-        //función para registrar los roles
+        //función para registrar los Modulo
         public function registrarModulo(){
-            if($this->idRol!="")
-            $sql="UPDATE modulo SET nombreModulo='$this->nombreRol', eliminado=false WHERE idRol=$this->idModulo";
+            if($this->idModulo!="")
+            $sql="UPDATE modulo SET nombreModulo='$this->nombreModulo', eliminado=false WHERE idModulo=$this->idModulo";
             else
             $sql="INSERT INTO modulo (nombreModulo,eliminado) VALUES ('$this->nombreModulo',false)";
             //se ejecuta la consulta

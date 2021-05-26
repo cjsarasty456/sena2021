@@ -1,11 +1,11 @@
 <?php
-require_once '../../controllers/userController.php';
+// require_once '../../controllers/userController.php';
 $oUserController=new userController();
 $registro=$oUserController->detalleRol($idRol);
 $prueba="";
 ?>
 <h2><i class="fas fa-info-circle"></i> Información Rol</h2>
-<form action="" method="post">
+<form action="../../controllers/userController.php" method="post">
     <div class="row">
         <div class="col col-12">
         <input type="hidden" name="idRol" value="<?php echo $registro->idRol; ?>">

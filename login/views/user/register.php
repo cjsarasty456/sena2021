@@ -1,6 +1,6 @@
 <?php
 require_once "../../config/config.php";
-require_once "../../controllers/userController.php";
+// require_once "../../controllers/userController.php";
 $oConfig=new config();
     session_start();
     // echo $_SESSION['idUser'];
@@ -38,7 +38,7 @@ $oConfig=new config();
             echo $_GET['mensaje'];
           }
         ?></p>
-      <form action="" method="post">
+      <form action="../../controllers/userController.php" method="post">
       <div class="input-group mb-3">
           <input type="text" class="form-control" name="name" placeholder="nombre" required>
           <div class="input-group-append">

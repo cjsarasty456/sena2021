@@ -46,7 +46,13 @@ require_once '../head.php';
         ?>
     </tbody>
 </table>
-
+<?php
+if(Count($Consulta)==0){
+            ?>
+                <h4>No se encontrarón resultados</h4>
+            <?php
+        }
+        ?>
 
 <?php
 $requiereSesion=true;
