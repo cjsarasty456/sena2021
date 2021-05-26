@@ -23,17 +23,18 @@
     <div class="card-body">
       <p class="login-box-msg">Ingrese los siguientes datos</p>
         <p style="color:#FE2D00;">
-     <form action="" method="POST">
+     <form action="../../controller/usuarioController.php" method="POST">
+     <!-- atributo required vuelve el campo obligatorio -->
         <label for="">Nombre</label>
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" name="nombre" required minlength="5" maxlength="30">
         <label for="">Correo electronico</label>
-        <input class="form-control" type="email">
+        <input class="form-control" type="email" name="correoElectronico" required minlength="15" maxlength="50">
         <label for="">Contraseña</label>
-        <input class="form-control" type="password">
+        <input class="form-control" type="password" name="contrasena" required minlength="10" maxlength="50">
         <label for="">Confirmar Contraseña</label>
-        <input class="form-control" type="password">
+        <input class="form-control" type="password" name="confirmContrasena" required minlength="10" maxlength="50">
         <br>
-        <button type="submit" class="btn btn-info">Registrar Usuario</button>
+        <button type="submit" class="btn btn-info" name="funcion" value="registro">Registrar Usuario</button>
     </form>
     <p class="mb-1">
         <a href="recuperarContrasena.php">¿Olvidó su contraseña?</a>

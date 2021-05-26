@@ -21,12 +21,23 @@ class usuario
         //se genera la conexión con la base de datos
         $Conexion=$oConexion->conexion();
         //se crea la sentencia sql para registrar el usuario
-        $sql="INSERT INTO usuario (nombre,correoElectronico,contrasena,eliminado)
-        VALUES ('$nombre','$correoElectronico','$contrasenaMd5',false)";
+        $sql="INSERT INTO usuario (nombre,correoElectronico,contrasena,resetContrasena,idRol,eliminado)
+        VALUES ('$nombre','$correoElectronico','$contrasenaMd5',0,null,false)";
         //ejecuta la sentencia
         $result=mysqli_query($Conexion,$sql);
         //
         return $result;
+    }
+    //se verifica si ya hay un registro con el correo electronico 
+    public function consultarCorreoElectronico($correoElectronico){
+        //generar la conexión
+        $oConexion=new conectar();
+        $conexion=$oConexion->conexion();
+        $sql="SELECT * FROM usuario WHERE correoElectronico='$correoElectronico'";
+        $result=mysqli_query($conexion,$sql);
+        $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+        return count($result);
+
     }
 
 }
