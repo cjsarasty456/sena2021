@@ -1,6 +1,13 @@
 <?php
 require_once '../mensajes.php';
 require_once '../modelo/conexiondb.php';
+//si no está definida o no tiene valor se redirige al login
+//en caso contrario no hace nada
+session_start();
+if(!isset($_SESSION['idUser'])){
+  header("Location: user/login.php");
+  die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -40,3 +47,7 @@ require_once '../modelo/conexiondb.php';
       </nav>
       <br>
       <div class="container">
+
+      Bienvenido <?php echo $_SESSION['nombreUser'] ?>
+      <a href="../controller/usuarioController.php?funcion=cerrarSesion" 
+      class="btn btn-primary">Cerrar sesión</a>

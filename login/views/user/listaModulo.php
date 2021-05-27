@@ -36,9 +36,12 @@ require_once '../head.php';
                 <td>
                     <a href="detalleRol.php?idModulo=<?php echo $registro['idModulo']; ?>" class="btn btn-info"><i class="far fa-eye"></i></a>
                     <!-- <a href="edi.php?id=<?php echo $registro['idModulo']; ?>" class="btn btn-warning"><i class="far fa-edit"></i></a> -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick="eliminar(<?php echo $registro['idModulo'];?>);">
+                    <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-Eliminar" onclick="eliminar(<?php echo $registro['idModulo'];?>);">
                         <i class="fas fa-trash"></i> 
-                    </button>
+                    </button> -->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-Eliminar" onclick="eliminar(<?php echo $registro['idModulo'];?>);">
+                    <i class="fas fa-trash"></i> 
+                </button>
                 </td>
             </tr>
             <?php
@@ -65,24 +68,29 @@ require_once '../footer.php';
         document.getElementById("id").value=id;
     }
 </script>
-<!-- Modal -->
-<div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="eliminarModalLabel">Elimina</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+<div class="modal fade" id="modal-Eliminar">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Eliminar Modulo</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Está seguro de eliminar este registro</p>
+            </div>
+            <form action="../../controllers/userController.php" method="POST">
+                <input type="text" name="idModulo">
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" name="funcion" name="EliminarModulo" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
       </div>
-      <div class="modal-body">
-      ¿Está seguro de que desea eliminar el registro?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <form action="../eliminarEstudiante.php" method="GET">
-          <input id="id" name="id" type="text" style="display:none;">
-          <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+      <!-- /.modal -->

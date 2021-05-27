@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  if(isset($_SESSION['idUser'])){
+    header("Location: ../index.php");
+    //para matar o cerrar la pagina actual cuando se redirecciona
+    die();
+  }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,19 +31,19 @@
     <div class="card-body">
       <p class="login-box-msg">Inicia sesión para continuar</p>
         <p style="color:#FE2D00;">
-     <form action="" method="POST">
+     <form action="../../controller/usuarioController.php" method="POST">
         <label for="">Correo electronico</label>
-        <input class="form-control" type="email">
+        <input class="form-control" type="email" name="correoElectronico">
         <label for="">Contraseña</label>
-        <input class="form-control" type="password">
+        <input class="form-control" type="password" name="contrasena">
         <br>
-        <button type="submit" class="btn btn-success">Iniciar Sesión</button>
+        <button type="submit" class="btn btn-success" name="funcion" value="iniciarSesion">Iniciar Sesión</button>
     </form>
     <p class="mb-1">
         <a href="recuperarContrasena.php">¿Olvidó su contraseña?</a>
       </p>
       <p class="mb-0">
-        <a href="register.php" class="text-center">¿No tiene usuario?</a>
+        <a href="registro.php" class="text-center">¿No tiene usuario?</a>
       </p>
     </div>
     <!-- /.login-card-body -->
