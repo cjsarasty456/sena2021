@@ -30,17 +30,18 @@ class modulo extends conexiondb{
         }
 
             //función que consulta del Modulo por el idModulo
-            public function ConsultarModuloId(){
+            public function ConsultarModuloId($idModulo){
                 //consulta para traer la información de los Modulo
-                $sql="SELECT * FROM modulo WHERE idModulo=$this->idModulo";
+                $sql="SELECT * FROM modulo WHERE idModulo=$idModulo";
                 //se ejecuta la consulta
                 $result=mysqli_query($this->getConexion(),$sql);
                 //se organiza el resultado de la consulta en un arreglo asociativo para buscar usando como indice el nombre de cada campo
                 $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
                 foreach($result as $registro){
-                    $this->idRol=$registro['idModulo'];
-                    $this->nombreRol=$registro['nombreModulo'];
+                    $this->idModulo=$registro['idModulo'];
+                    $this->nombreModulo=$registro['nombreModulo'];
                 }
+                return $this;
             }
 
         //función para registrar los Modulo

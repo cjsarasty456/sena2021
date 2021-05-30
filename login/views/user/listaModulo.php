@@ -34,7 +34,7 @@ require_once '../head.php';
             <tr>
                 <td><?php echo $registro['nombreModulo']; ?></td>
                 <td>
-                    <a href="detalleRol.php?idModulo=<?php echo $registro['idModulo']; ?>" class="btn btn-info"><i class="far fa-eye"></i></a>
+                    <a href="detalleModulo.php?idModulo=<?php echo $registro['idModulo']; ?>" class="btn btn-info"><i class="far fa-eye"></i></a>
                     <!-- <a href="edi.php?id=<?php echo $registro['idModulo']; ?>" class="btn btn-warning"><i class="far fa-edit"></i></a> -->
                     <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-Eliminar" onclick="eliminar(<?php echo $registro['idModulo'];?>);">
                         <i class="fas fa-trash"></i> 

@@ -54,8 +54,9 @@ switch($funcion){
 }
 
 class userController {
-
+//Sección gestión usuario
     public function login($email,$password){
+        session_start();
         require_once '../models/user.php';
         $oUser=new user();
         $result=$oUser->login($email,$password);
@@ -119,6 +120,8 @@ class userController {
         //se retorna el objeto del rol con la información del rol
         return $oRol;
     }
+//fin sección
+//sección roles
     //función para consultar la lista de Rol 
     public function ListaRoles(){
         require_once '../../models/rol.php';
@@ -161,11 +164,19 @@ class userController {
         $oRol=new rol();
         return $oRol->ObtenerUsuariosRol($idRol);
     }
-
+//fin sección
+//Sección Modulos
+    //función para consultar lista Modulos
     public function ConsultarListaModulos(){
         require_once '../../models/modulo.php';          
         $oModulo=new modulo();
         return $oModulo->ConsultarListaModulo();
+    }
+    //función para consultar los detalles de un modulo
+    public function detalleModulo($idModulo){
+        require_once '../../models/modulo.php'; 
+        $oModulo=new modulo();
+        return $oModulo->ConsultarModuloId($idModulo);
     }
     //Función para registrar el Modulo nuevo o editar
     public function registrarModulo(){
@@ -198,6 +209,7 @@ class userController {
         }
         die();
     }
+//fin Sección
 }
 
 ?>

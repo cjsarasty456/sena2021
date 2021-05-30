@@ -139,4 +139,4 @@ require_once '../../controllers/mensajeController.php';
     <div class="box">
       <div class="box-body">
 
-      Bienvenido <?php echo $_SESSION[''] ?>
+  
