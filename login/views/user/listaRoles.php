@@ -13,6 +13,17 @@ require_once '../head.php';
         </div><!-- /.container-fluid -->
     </div>
     <!-- etiqueta para crear la tabla -->
+    <?php
+          require_once '../../controllers/UserController.php';
+          if(isset($_GET['tituloMensaje'])!=""){ 
+            require_once '../../controllers/mensajeController.php';
+            $oMensaje=new  mensaje();
+            $tituloMensaje=$_GET['tituloMensaje'];
+            $tipoMensaje=$_GET['tipoMensaje'];
+            $mensaje=$_GET['mensaje'];
+            echo $oMensaje->mostrarMensaje($tituloMensaje,$tipoMensaje,$mensaje);
+          }
+        ?>
 <table class="table">
     <!-- etiqueta el encabezado de la tabla -->
     <thead>

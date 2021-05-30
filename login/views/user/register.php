@@ -33,11 +33,19 @@ $oConfig=new config();
   <div class="card">
     <div class="card-body">
       <p class="login-box-msg">Nuevo Usuario</p>
-        <p style="color:#FE2D00;"><?php
-          if(isset($_GET['mensaje'])){ 
-            echo $_GET['mensaje'];
+        <p style="color:#FE2D00;">
+        <?php
+          require_once '../../controllers/UserController.php';
+          if(isset($_GET['tituloMensaje'])!=""){ 
+            require_once '../../controllers/mensajeController.php';
+            $oMensaje=new  mensaje();
+            $tituloMensaje=$_GET['tituloMensaje'];
+            $tipoMensaje=$_GET['tipoMensaje'];
+            $mensaje=$_GET['mensaje'];
+            echo $oMensaje->mostrarMensaje($tituloMensaje,$tipoMensaje,$mensaje);
           }
-        ?></p>
+        ?>
+        </p>
       <form action="../../controllers/userController.php" method="post">
       <div class="input-group mb-3">
           <input type="text" class="form-control" name="name" placeholder="nombre" required>
