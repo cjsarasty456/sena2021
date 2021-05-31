@@ -39,7 +39,7 @@ $idModulo=$_GET['idModulo'];
                         <?php require_once "_detalleModulo.php"; ?>
                     </div>
                     <div class="tab-pane fade" id="vert-tabs-right-Pagina" role="tabpanel" aria-labelledby="vert-tabs-right-profile-tab">
-                        <?php require_once "_listaUsuario.php"; ?>
+                        <?php require_once "_listaPaginas.php"; ?>
                     </div>
                 </div>
             </div>

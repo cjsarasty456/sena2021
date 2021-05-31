@@ -46,8 +46,7 @@ require_once '../head.php';
                 <td><?php echo $registro['nombreRol']; ?></td>
                 <td>
                     <a href="detalleRol.php?idRol=<?php echo $registro['idRol']; ?>" class="btn btn-info"><i class="far fa-eye"></i></a>
-                    <!-- <a href="edi.php?id=<?php echo $registro['idRol']; ?>" class="btn btn-warning"><i class="far fa-edit"></i></a> -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick="eliminar(<?php echo $registro['idRol'];?>);">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick="cargarId(<?php echo $registro['idRol'];?>);">
                         <i class="fas fa-trash"></i> 
                     </button>
                 </td>
@@ -58,41 +57,44 @@ require_once '../head.php';
     </tbody>
 </table>
 <?php
-if(Count($Consulta)==0){
-            ?>
-                <h4>No se encontrarón resultados</h4>
-            <?php
-        }
-        ?>
-
+  if(Count($Consulta)==0){
+?>
+    <h4>No se encontrarón resultados</h4>
+    <?php
+  }
+?>
 <?php
-$requiereSesion=true;
+// $requiereSesion=true;
 require_once '../footer.php';
 ?>
 
-<script>
-    function eliminar(id){
-        document.getElementById("id").value=id;
-    }
-</script>
-<!-- Modal -->
-<div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-Eliminar">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="eliminarModalLabel">Elimina</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title">Eliminar Rol</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
-      ¿Está seguro de que desea eliminar el registro?
+        <p>Está seguro de eliminar este registro</p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <form action="../eliminarEstudiante.php" method="GET">
-          <input id="id" name="id" type="text" style="display:none;">
-          <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
-        </form>
-      </div>
+      <form action="../../controllers/userController.php" method="POST">
+          <input type="hidden" id="idRol" name="idRol">
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <button type="submit" name="funcion" value="eliminarRol" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+          </div>
+      </form>
     </div>
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
 </div>
+<!-- /.modal -->
+<script>
+  function cargarId(id){
+    document.getElementById('idRol').value=id;
+  }
+</script>

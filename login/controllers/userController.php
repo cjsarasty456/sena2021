@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 
 author: Carlos Julio Cadena Sarasty
@@ -13,11 +12,11 @@ state: Developing
 */
 if(file_exists("../../controllers/mensajeController.php"))
 {
-require_once '../../controllers/mensajeController.php';
-require_once '../../config/config.php';
+    require_once '../../controllers/mensajeController.php';
+    require_once '../../config/config.php';
 }else{
     require_once '../controllers/mensajeController.php';
-require_once '../config/config.php';
+    require_once '../config/config.php';
 }
 $oUser=new userController();
 $funcion="";
@@ -48,24 +47,33 @@ switch($funcion){
     case "registrarRol":
         return $oUser->registrarRol();
     break;
+    case "eliminarRol":
+        return $oUser->eliminarRol();
+    break;
     case "registrarModulo":
         return $oUser->registrarModulo();
+    break;
+    case "eliminarModulo":
+        return $oUser->eliminarModulo();
+    break;
+    case "registrarPagina":
+        return $oUser->registrarPagina();
     break;
 }
 
 class userController {
+    
 //Sección gestión usuario
     public function login($email,$password){
+        $oMensaje=new mensaje();
         session_start();
         require_once '../models/user.php';
         $oUser=new user();
         $result=$oUser->login($email,$password);
-        
         if($result==1){
-            $_SESSION["idUser"]=$oUser->getIdUser();
-        $_SESSION["nameUser"]=$oUser->getNameUser();
             // echo "inicio correcto";
-            // echo $_SESSION["nameUser"];
+            $_SESSION["idUser"]=$oUser->getIdUser();
+            $_SESSION["nameUser"]=$oUser->getNameUser();
             header("Location: ../views/home/index.php");
             die();
         } 
@@ -79,20 +87,39 @@ class userController {
             die();
         }
     }
-
     public function register($name,$email,$password,$confirmPassword){
+        $oMensaje=new mensaje();
         require_once '../models/user.php';
         $oUser=new user();
         //se verifica si el correo electronico ya existe en el sistema
         $checkEmail=$result=$oUser->checkEmail($email);
-        if($password!=$confirmPassword) header("Location: ../views/user/register.php?name=$name&email=$email&mensaje=Las contraseñas registradas no coinciden");
+        if($password!=$confirmPassword){
+            $tituloMensaje="Error";
+            $tipoMensaje=$oMensaje->tipoAdvertencia;
+            $mensaje="Error al crear el usuario contraseña y confirmación de la contraseña no coinciden";
+            $url="../views/user/register.php";
+            header("Location: $url?name=$name&email=$email&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+            die();
+        } 
         elseif(sizeof($checkEmail)>0){ 
-            header("Location: ../views/user/register.php?name=$name&email=$email&mensaje=El correo ya existe, si olvidó su contraseña intente restablecerla");
+            $tituloMensaje="Error";
+            $tipoMensaje=$oMensaje->tipoInfo;
+            $mensaje="Error al crear el usuario, El correo electronico ya existe, intente recuperar la contraseña";
+            $url="../views/user/register.php";
+            header("Location: $url?name=$name&email=$email&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
             die();
         }else{
             $result=$oUser->register($name,$email,$password,$confirmPassword);
             //se indica que se presentó un error al iniciar sesión
-            if(!$result) header("Location: ../views/user/register.php?name=$name&email=$email&mensaje=Error al registrar el usuario");
+            if(!$result){
+                $tituloMensaje="Error";
+                $tipoMensaje=$oMensaje->tipoPeligo;
+                $mensaje="Error al crear el usuario, Intente proximamente";
+                $url="../views/user/register.php";
+                header("Location: $url?name=$name&email=$email&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+                die();
+                // header("Location: ../views/user/register.php?name=$name&email=$email&mensaje=Error al registrar el usuario");
+            }
             //se indica que se registró correctamente y se redirije al login
             else header("Location: ../views/user/login.php?mensaje=se registró correctamente");
             die();
@@ -109,6 +136,7 @@ class userController {
         die();
     }
     public function detalleRol($idRol){
+        $oMensaje=new mensaje();
         //se agrega la referencia del modelo de base datos Rol
         require_once '../../models/rol.php';
         //se instancia el objeto Rol
@@ -141,9 +169,9 @@ class userController {
             $tipoMensaje=$oMensaje->tipoCorrecto;
             $mensaje="Rol registrado correctamente";
             if($oRol->idRol=="")
-            $url="../view/user/listaRoles.php";
+            $url="../views/user/listaRoles.php";
             else
-            $url="../view/user/detalleRol.php";
+            $url="../views/user/detalleRol.php";
             header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
         }
         else{
@@ -151,12 +179,32 @@ class userController {
             $tipoMensaje=$oMensaje->tipoPeligo;
             $mensaje="Error al guardar el Rol";
             if($oRol->idRol=="")
-            $url="../view/user/NuevoRol.php";
+            $url="../views/user/NuevoRol.php";
             else
-            $url="../view/user/detalleRol.php";
+            $url="../views/user/detalleRol.php";
             header("Location: $url?idRol=$oRol->idRol&nombreRol=$oRol->nombreRol&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
         }
         die();
+    }
+    //función para eliminar los roles
+    public function eliminarRol(){
+        $oMensaje=new mensaje();
+        require_once '../models/rol.php';          
+        $oModulo=new rol();
+        $oModulo->idModulo=$_POST['idRol'];
+        if($oModulo->eliminarRol()){
+            $tituloMensaje="Excelete";
+            $tipoMensaje=$oMensaje->tipoCorrecto;
+            $mensaje="Se eliminó correctamente el Rol";
+            $url="../views/user/listaRol.php";
+            header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+        }else{
+            $tituloMensaje="Error";
+            $tipoMensaje=$oMensaje->tipoPeligo;
+            $mensaje="Error al eliminar el Rol";
+            $url="../views/user/listaRol.php";
+            header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+        }
     }
     //función para retornar los usuario relacionados con un rol
     public function ObtenerUsuariosRol($idRol){
@@ -189,26 +237,100 @@ class userController {
         {
             $tituloMensaje="Excelente";
             $tipoMensaje=$oMensaje->tipoCorrecto;
-            $mensaje="Se ha creado correctamente el modulo";
-            if($oModulo->oModulo=="")
-            $url="../views/user/listaModulo.php";
-            else
-            $url="../views/user/detalleModulo.php";
-            header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+            if($oModulo->idModulo==""){
+                $mensaje="Se ha creado correctamente el modulo";
+                $url="../views/user/listaModulo.php";
+                header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+            }
+            else{
+                $mensaje="Se actualizó correctamente";
+                $url="../views/user/detalleModulo.php";
+                header("Location: $url?idModulo=$oModulo->idModulo&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+            }
             die();
         }
         else{
             $tituloMensaje="Error";
             $tipoMensaje=$oMensaje->tipoPeligo;
             $mensaje="Error al guardar el Modulo";
-            if($oModulo->idModulo=="")
-            $url="../views/user/NuevoModulo.php";
-            else
-            $url="../views/user/detalleModulo.php";
-            header("Location: $url");
+            if($oModulo->idModulo==""){
+                $url="../views/user/listaModulo.php";
+                header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+            }
+            else{
+                $url="../views/user/detalleModulo.php";
+                header("Location: $url?idModulo=$oModulo->idModulo&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+            }
         }
         die();
     }
+    //función para eliminar los modulos
+    public function eliminarModulo(){
+        $oMensaje=new mensaje();
+        require_once '../models/modulo.php';          
+        $oModulo=new modulo();
+        $oModulo->idModulo=$_POST['idModulo'];
+        if($oModulo->eliminarModulo()){
+            $tituloMensaje="Excelete";
+            $tipoMensaje=$oMensaje->tipoCorrecto;
+            $mensaje="Se eliminó correctamente el modulo";
+            $url="../views/user/listaModulo.php";
+            header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+        }else{
+            $tituloMensaje="Error";
+            $tipoMensaje=$oMensaje->tipoPeligo;
+            $mensaje="Error al eliminar el Modulo";
+            $url="../views/user/listaModulo.php";
+            header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+        }
+    }
+
+
+
+//fin Sección
+
+//sección paginas
+
+    //consultar lista pagina por modulo
+    public function ObtenerPaginasModulo($idModulo){
+        $oMensaje=new mensaje();
+        require_once '../../models/pagina.php';          
+        $oPagina=new pagina();
+        $oPagina->idModulo=$idModulo;
+        return $oPagina->ConsultarListaPaginasModulo();
+    }
+
+        //función para registrar la página
+        public function registrarPagina(){
+            $oMensaje=new mensaje();
+            require_once '../models/pagina.php';          
+            $oPagina=new pagina();
+            $oPagina->idPagina=$_POST['idPagina'];
+            $oPagina->idModulo=$_POST['idModulo'];
+            $oPagina->nombrePagina=$_POST['nombrePagina'];
+            if($oPagina->registrarPagina()){
+                $tituloMensaje="Excelente";
+                $tipoMensaje=$oMensaje->tipoCorrecto;
+                if($oPagina->idPagina==""){
+                    $mensaje="Se creó correctamente la página";
+                    
+                }else{
+                    $mensaje="Se actualizó correctamente la página";
+                }
+                $url="../views/user/detalleModulo.php";
+                header("Location: $url?idModulo=$oPagina->idModulo&tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");                    
+            }else{
+                $tituloMensaje="Error";
+                $tipoMensaje=$oMensaje->tipoPeligo;
+                if($oPagina->idPagina==""){
+                    $mensaje="Error al crear la página";
+                    $url="../views/user/NuevaPagina.php";
+                }else{
+                    $mensaje="Error al editar la página";
+                }
+                header("Location: $url?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
+            }
+        }
 //fin Sección
 }
 

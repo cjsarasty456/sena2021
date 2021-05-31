@@ -70,10 +70,10 @@ require_once '../../controllers/mensajeController.php';
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> -->
         <div class="info">
-          <!-- <?php if(isset($_SESSION["nameUser"])){ ?>
+          <?php if(isset($_SESSION["nameUser"])){ ?>
             <a href="../user/user.php" class="d-block"><?php echo $_SESSION["nameUser"]; ?></a>
             <a href="../../controllers/userController.php?funcion=cerrarSesion">Cerrar Sesión</a>
-          <?php } ?> -->
+          <?php } ?>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -138,5 +138,3 @@ require_once '../../controllers/mensajeController.php';
   <div class="content-wrapper">
     <div class="box">
       <div class="box-body">
-
-  

@@ -1,7 +1,4 @@
 <?php
-require_once "../../config/config.php";
-// require_once "../../controllers/userController.php";
-$oConfig=new config();
     session_start();
     // echo $_SESSION['idUser'];
     if(isset($_SESSION['idUser'])){
@@ -15,7 +12,6 @@ $oConfig=new config();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Registro</title>
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -35,7 +31,7 @@ $oConfig=new config();
       <p class="login-box-msg">Nuevo Usuario</p>
         <p style="color:#FE2D00;">
         <?php
-          require_once '../../controllers/UserController.php';
+          // require_once '../../controllers/UserController.php';
           if(isset($_GET['tituloMensaje'])!=""){ 
             require_once '../../controllers/mensajeController.php';
             $oMensaje=new  mensaje();

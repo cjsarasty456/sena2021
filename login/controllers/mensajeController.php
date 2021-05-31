@@ -8,10 +8,10 @@ class mensaje{
     public $tipoCorrecto="success";
 
     //variables iconos
-    public $iconoPeligo="fas fa-times";
-    public $iconoAdvertencia="icon fas fa-ban";
-    public $iconoInfo="icon fas fa-ban";
-    public $iconoCorrecto="icon fas fa-ban";
+    public $iconoPeligo="fas fa-times-circle";
+    public $iconoAdvertencia="fas fa-exclamation-triangle";
+    public $iconoInfo="fas fa-exclamation-circle";
+    public $iconoCorrecto="fas fa-check-circle";
 
 
     public function mostrarMensaje($titulo,$tipoMensaje,$mensaje){
@@ -26,7 +26,16 @@ class mensaje{
         switch($tipo){
             case $this->tipoPeligo:
                 return $this->iconoPeligo;
-                break;
+            break;
+            case $this->tipoAdvertencia:
+                return $this->iconoAdvertencia;
+            break;
+            case $this->tipoInfo:
+                return $this->iconoInfo;
+            break;
+            case $this->tipoCorrecto:
+                return $this->iconoCorrecto;
+            break;
         }
     }
 }

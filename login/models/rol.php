@@ -53,6 +53,13 @@ class rol extends conexiondb{
             $result=mysqli_query($this->getConexion(),$sql);
             return $result;
         }
+        //función para eliminar Rol
+        public function eliminarRol(){
+            $sql="UPDATE rol SET eliminado=true WHERE idModulo=$this->idRol";
+            //se ejecuta la consulta
+            $result=mysqli_query($this->getConexion(),$sql);
+            return $result;
+        }
 
         public function ObtenerUsuariosRol($idRol){
             //se Consulta los usuario por rol

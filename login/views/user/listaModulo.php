@@ -50,7 +50,7 @@ require_once '../head.php';
                     <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-Eliminar" onclick="eliminar(<?php echo $registro['idModulo'];?>);">
                         <i class="fas fa-trash"></i> 
                     </button> -->
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-Eliminar" onclick="eliminar(<?php echo $registro['idModulo'];?>);">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-Eliminar" onclick="cargarId(<?php echo $registro['idModulo'];?>);">
                     <i class="fas fa-trash"></i> 
                 </button>
                 </td>
@@ -93,10 +93,10 @@ require_once '../footer.php';
               <p>Está seguro de eliminar este registro</p>
             </div>
             <form action="../../controllers/userController.php" method="POST">
-                <input type="text" name="idModulo">
+                <input type="hidden" id="idModulo" name="idModulo">
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" name="funcion" name="EliminarModulo" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                    <button type="submit" name="funcion" value="eliminarModulo" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
                 </div>
             </form>
           </div>
@@ -105,3 +105,12 @@ require_once '../footer.php';
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+
+
+      
+  
+<script>
+function cargarId(id){
+  document.getElementById('idModulo').value=id;
+}
+</script>
