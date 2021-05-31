@@ -20,7 +20,7 @@ class modulo extends conexiondb{
 //función que consulta los modulos registrados
     public function ConsultarListaModulo(){
         //consulta para traer la información de los roles
-        $sql="SELECT * FROM modulo WHERE eliminado=0";
+        $sql="SELECT * FROM modulo WHERE eliminado=0 ORDER BY nombreModulo desc";
         //se ejecuta la consulta
         $result=mysqli_query($this->getConexion(),$sql);
         //se organiza el resultado de la consulta en un arreglo asociativo para buscar usando como indice el nombre de cada campo
