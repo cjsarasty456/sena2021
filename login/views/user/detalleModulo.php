@@ -36,10 +36,10 @@ $idModulo=$_GET['idModulo'];
             <div class="col-7 col-sm-9">
                 <div class="tab-content" id="vert-tabs-right-tabContent">
                     <div class="tab-pane fade show active" id="vert-tabs-right-Detalle" role="tabpanel" aria-labelledby="vert-tabs-right-home-tab">
-                        <?php require_once "_detalleModulo.php"; ?>
+                        <?php require_once "modulo/_detalleModulo.php"; ?>
                     </div>
                     <div class="tab-pane fade" id="vert-tabs-right-Pagina" role="tabpanel" aria-labelledby="vert-tabs-right-profile-tab">
-                        <?php require_once "_listaPaginas.php"; ?>
+                        <?php require_once "modulo/_listaPaginas.php"; ?>
                     </div>
                 </div>
             </div>

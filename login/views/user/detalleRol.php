@@ -36,13 +36,13 @@ $idRol=$_GET['idRol'];
             <div class="col-7 col-sm-9">
                 <div class="tab-content" id="vert-tabs-right-tabContent">
                     <div class="tab-pane fade show active" id="vert-tabs-right-home" role="tabpanel" aria-labelledby="vert-tabs-right-home-tab">
-                        <?php require_once "_detalles.php"; ?>
+                        <?php require_once "rol/_detalles.php"; ?>
                     </div>
                     <div class="tab-pane fade" id="vert-tabs-right-profile" role="tabpanel" aria-labelledby="vert-tabs-right-profile-tab">
-                        <?php require_once "_listaUsuario.php"; ?>
+                        <?php require_once "rol/_listaUsuario.php"; ?>
                     </div>
                     <div class="tab-pane fade" id="vert-tabs-right-messages" role="tabpanel" aria-labelledby="vert-tabs-right-messages-tab">
-                        <?php require_once "_permisos.php"; ?>
+                        <?php require_once "rol/_permisos.php"; ?>
                     </div>
                 </div>
             </div>

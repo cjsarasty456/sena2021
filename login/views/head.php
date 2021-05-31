@@ -15,7 +15,7 @@ require_once '../../controllers/mensajeController.php';
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="../../assets/dist/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -134,7 +134,8 @@ require_once '../../controllers/mensajeController.php';
   </aside>
 <!-- Content Wrapper. Contains page content -->
 <br>
-<div class="container-fluid">
-  <div class="content-wrapper">
+
+<div class="content-wrapper">
+  <div class="container-xl">
     <div class="box">
       <div class="box-body">

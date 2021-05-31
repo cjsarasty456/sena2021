@@ -2,6 +2,9 @@
 $requiereSesion=true;
 require_once '../head.php';
 ?>
+<div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -68,7 +71,8 @@ if(Count($Consulta)==0){
             <?php
         }
         ?>
-
+    </div>
+</div>
 <?php
 $requiereSesion=true;
 require_once '../footer.php';

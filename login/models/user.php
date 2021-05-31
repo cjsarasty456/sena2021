@@ -19,13 +19,26 @@ require_once 'conexiondb.php';
         private $email="";
         private $password="";
         private $resetContrasena="";
-        private $idRole="";
+        private $idRol="";
 
         public function getIdUser(){
             return $this->idUser;
         }
         public function getNameUser(){
             return $this->name;
+        }
+        //función para obtener el rol del usuario
+        public function getRolUser($idUser){
+            $sql="SELECT * FROM usuario WHERE idRol=$idUser";
+            //se ejecuta la consulta
+            $result=mysqli_query($this->getConexion(),$sql);
+            $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+            foreach($result as $registro)
+            {
+                //se registra la consulta en los parametros
+                $this->idRol=$registro['idRol'];
+            }
+            return $this->idRol;
         }
 
         public function login($email, $password){

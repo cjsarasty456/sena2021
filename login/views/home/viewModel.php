@@ -14,7 +14,10 @@ require_once '../head.php';
     </div>
     <!-- /.content-header -->
     <!-- contenido de la pagina -->
-
+    <div class="card card-primary card-outline">
+        <div class="card-body box-profile">
+        </div>
+    </div>
 
 <?php
 $requiereSesion=true;

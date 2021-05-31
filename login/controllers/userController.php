@@ -64,6 +64,14 @@ switch($funcion){
 class userController {
     
 //Sección gestión usuario
+
+    //función para consultar el rol del usuario 
+    public function obtenerRolUsuario(){
+        require_once '../../models/user.php';
+        $oUser=new user();
+        // $oUser->idUser=$_SESSION["idUser"];
+        return $oUser->getRolUser($_SESSION["idUser"]);
+    }
     public function login($email,$password){
         $oMensaje=new mensaje();
         session_start();
@@ -156,6 +164,7 @@ class userController {
         $oRol=new rol();
         return $oRol->ConsultarListaRoles();
     }
+    
     //Función para registrar el rol nuevo o editar
     public function registrarRol(){
         require_once '../models/rol.php';          
