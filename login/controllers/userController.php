@@ -80,18 +80,20 @@ class userController {
         $result=$oUser->login($email,$password);
         if($result==1){
             // echo "inicio correcto";
+            //se crea la variable de sesión para almacenar el idUser y nombre del usuario para acceder a el en cualquier página
             $_SESSION["idUser"]=$oUser->getIdUser();
             $_SESSION["nameUser"]=$oUser->getNameUser();
             header("Location: ../views/home/index.php");
+            //eliminar o mate la página actual 
             die();
         } 
         else{ 
             // echo "error en el inicio";
             $oMensaje=new mensaje();
             $tituloMensaje="Error";
-            $tipoMensjae=$oMensaje->tipoPeligo;
+            $tipoMensaje=$oMensaje->tipoPeligo;
             $mensaje="usuario o contraseña incorrecto";
-            header("Location: ../views/user/login.php?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensjae&mensaje=$mensaje");
+            header("Location: ../views/user/login.php?tituloMensaje=$tituloMensaje&tipoMensaje=$tipoMensaje&mensaje=$mensaje");
             die();
         }
     }

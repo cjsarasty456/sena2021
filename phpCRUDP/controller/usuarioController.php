@@ -10,8 +10,8 @@ switch($funcion){
         $oUsuario->registrarUsuario();
         break;
     case "iniciarSesion":
-
-        break;
+        $oUsuario->login();
+    break;
 
 }
 

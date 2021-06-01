@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2021 a las 15:37:44
--- Versión del servidor: 10.4.18-MariaDB
--- Versión de PHP: 7.3.27
+-- Tiempo de generación: 01-06-2021 a las 05:22:08
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,10 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `modulo` (
-  `id` int(11) NOT NULL,
+  `idModulo` int(11) NOT NULL,
   `nombreModulo` varchar(50) NOT NULL,
   `eliminado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `modulo`
+--
+
+INSERT INTO `modulo` (`idModulo`, `nombreModulo`, `eliminado`) VALUES
+(1, 'Configuración', 0),
+(3, 'sdfsdfsd', 1),
+(4, 'Inicio', 0);
 
 -- --------------------------------------------------------
 
@@ -40,11 +49,22 @@ CREATE TABLE `modulo` (
 --
 
 CREATE TABLE `pagina` (
-  `id` int(11) NOT NULL,
+  `idPagina` int(11) NOT NULL,
   `idModulo` int(11) NOT NULL,
-  `nombre` int(11) NOT NULL,
-  `enlace` int(11) NOT NULL
+  `nombrePagina` varchar(30) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pagina`
+--
+
+INSERT INTO `pagina` (`idPagina`, `idModulo`, `nombrePagina`, `eliminado`) VALUES
+(2, 1, 'Perfil', 0),
+(3, 1, 'Rol', 0),
+(4, 1, 'Modulos', 0),
+(5, 4, 'Pagina Inicial', 0),
+(6, 4, 'Acerca de', 0);
 
 -- --------------------------------------------------------
 
@@ -65,7 +85,7 @@ CREATE TABLE `permiso` (
 --
 
 CREATE TABLE `rol` (
-  `id` int(11) NOT NULL,
+  `idRol` int(11) NOT NULL,
   `nombreRol` varchar(30) NOT NULL,
   `eliminado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -74,8 +94,9 @@ CREATE TABLE `rol` (
 -- Volcado de datos para la tabla `rol`
 --
 
-INSERT INTO `rol` (`id`, `nombreRol`, `eliminado`) VALUES
-(1, 'Administrador', 0);
+INSERT INTO `rol` (`idRol`, `nombreRol`, `eliminado`) VALUES
+(1, 'Administrador', 0),
+(3, 'sadasdas', 0);
 
 -- --------------------------------------------------------
 
@@ -108,13 +129,13 @@ INSERT INTO `usuario` (`idUser`, `nombre`, `correoElectronico`, `contrasena`, `r
 -- Indices de la tabla `modulo`
 --
 ALTER TABLE `modulo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`idModulo`);
 
 --
 -- Indices de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idPagina`),
   ADD KEY `idModulo` (`idModulo`);
 
 --
@@ -129,7 +150,7 @@ ALTER TABLE `permiso`
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`idRol`);
 
 --
 -- Indices de la tabla `usuario`
@@ -143,16 +164,22 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `modulo`
+--
+ALTER TABLE `modulo`
+  MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPagina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -168,21 +195,21 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  ADD CONSTRAINT `pagina_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulo` (`id`);
+  ADD CONSTRAINT `pagina_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulo` (`idModulo`);
 
 --
 -- Filtros para la tabla `permiso`
 --
 ALTER TABLE `permiso`
-  ADD CONSTRAINT `permiso_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulo` (`id`),
-  ADD CONSTRAINT `permiso_ibfk_2` FOREIGN KEY (`idPagina`) REFERENCES `pagina` (`id`),
-  ADD CONSTRAINT `permiso_ibfk_3` FOREIGN KEY (`idRol`) REFERENCES `rol` (`id`);
+  ADD CONSTRAINT `permiso_ibfk_2` FOREIGN KEY (`idPagina`) REFERENCES `pagina` (`idPagina`),
+  ADD CONSTRAINT `permiso_ibfk_3` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`),
+  ADD CONSTRAINT `permiso_ibfk_4` FOREIGN KEY (`idModulo`) REFERENCES `modulo` (`idModulo`);
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idRol`) REFERENCES `rol` (`id`);
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
