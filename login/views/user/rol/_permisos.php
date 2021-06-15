@@ -4,8 +4,13 @@
   $listaModulos=$oUser->ConsultarListaModulos();
   // $listaPaginas=$oUser->ObtenerPaginasModulo($idModulo);
 ?>
-<h5>Paginas de permiso</h5>
-<form action="" method="post">
+<h5><i class="fas fa-window-maximize"></i> Paginas de permiso</h5>
+<form action="../../controllers/userController.php" method="get">
+  <button type="submit" class="btn btn-success" name="funcion" value="actualizarPermisos">
+    <i class="fas fa-save"></i> Actualizar permisos 
+  </button>
+  <input type="hidden" name="idRol" value="<?php echo $idRol; ?>">
+  <br>
   <table class="table table-hover">
     <tbody>
       <?php foreach($listaModulos as $registro){ ?>
@@ -26,10 +31,10 @@
                           ?>
                             <tr>
                               <td>
-                                <label for="">
-
-                                </label>
+                              <input id="check<?php echo $registroPagina['idPagina'] ?>" type="checkbox" name="idPaginas[]"  value="<?php echo $registroPagina['idPagina'] ?>">
+                                <label for="check<?php echo $registroPagina['idPagina'] ?>"> 
                                 <?php echo $registroPagina['nombrePagina']; ?>
+                                </label>
                               </td>
                             </tr>
                           <?php } ?>

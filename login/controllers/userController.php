@@ -44,6 +44,12 @@ switch($funcion){
     case "cerrarSesion":
         return $oUser->logOut();
     break;
+    case "recuperarContrasena":
+        return $oUser->recuperarContrasena();
+    break;
+    case "actualizarPermisos":
+        return $oUser->actualizarPermisos();
+    break;
     case "registrarRol":
         return $oUser->registrarRol();
     break;
@@ -83,6 +89,7 @@ class userController {
             //se crea la variable de sesión para almacenar el idUser y nombre del usuario para acceder a el en cualquier página
             $_SESSION["idUser"]=$oUser->getIdUser();
             $_SESSION["nameUser"]=$oUser->getNameUser();
+            //se redirige a la página principal
             header("Location: ../views/home/index.php");
             //eliminar o mate la página actual 
             die();
@@ -145,6 +152,20 @@ class userController {
         header("Location: ../");
         die();
     }
+    public function recuperarContrasena(){
+        $email=$_GET['email'];
+        require_once '../../models/user.php';
+        $oUser=new user();
+        //se verifica si el correo electronico existe
+        $emailExiste=$oUser->checkEmail($email);
+        if(sizeof($emailExiste)==0){
+            echo "el correo electronico no está registrado";
+        }else{
+            //el correo electronico existe
+            require_once 'configController.php';
+            
+        }
+    }
     public function detalleRol($idRol){
         $oMensaje=new mensaje();
         //se agrega la referencia del modelo de base datos Rol
@@ -157,6 +178,11 @@ class userController {
         $oRol->ConsultarRolId();
         //se retorna el objeto del rol con la información del rol
         return $oRol;
+    }
+    public function actualizarPermisos(){
+        $idRol=$_POST['idRol'];
+        $idPaginas=$_POST['idPaginas'];
+
     }
 //fin sección
 //sección roles
