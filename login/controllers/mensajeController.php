@@ -39,12 +39,12 @@ class mensaje{
         }
     }
 
-    public function enviarCorreo(){
+    public function enviarCorreo($asunto,$mensaje,$correoDestino){
         //archivo base para enviar correo electronico
         //utilizando la función mail
-        $correoDestino="cjsarasty@gmail.com";
-        $asunto="Asunto Correo de prueba";
-        $mensaje="Cuerpo del mensaje del correo prueba";
+        // $correoDestino="cjsarasty@gmail.com";
+        // $asunto="Asunto Correo de prueba";
+        // $mensaje="Cuerpo del mensaje del correo prueba";
         $header="From: correoOrigen@gmail.com"."\r\n ";
         $header.="Reply-To: correoOrigen@gmail.com"."\r\n";
         $header.="X-Mailer: PHP/".phpversion();
@@ -53,6 +53,21 @@ class mensaje{
         else echo "error al enviar";
     }
 
-}
+    public function enviarCorreoSolicitudContrasena($correoDestino,$codigo){
+        $asunto="Solicitud Cambio de contraseña";
+        $mensaje="Ingrese al siguiente enlace para restablecer la contraseña \n\r";
+        $url=$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."?funcion=restablecerContrasena&email=$correoDestino&codigo=$codigo";
+        $mensaje.=$url."\n\r";
+        $this->enviarCorreo($asunto,$mensaje,$correoDestino);
+        // echo $url;   
+    }
 
+    public function enviarCorreoRestablecerContrasena($correoDestino,$contrasena){
+        $asunto="Solicitud Cambio de contraseña";
+        $mensaje="Ingrese al siguiente enlace para restablecer la contraseña \n\r";
+        $mensaje.="Contraseña: "$contrasena."\n\r";
+        $mensaje.="Recuerde cambiar la contraseña al siguiente inicio\n\r";
+        $this->enviarCorreo($asunto,$mensaje,$correoDestino);
+    }
+}
 ?>

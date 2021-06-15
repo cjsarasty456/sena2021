@@ -47,6 +47,9 @@ switch($funcion){
     case "recuperarContrasena":
         return $oUser->recuperarContrasena();
     break;
+    case "restablecerContrasena":
+        return $oUser->restablecerContrasena();
+    break;
     case "actualizarPermisos":
         return $oUser->actualizarPermisos();
     break;
@@ -152,18 +155,46 @@ class userController {
         header("Location: ../");
         die();
     }
+    //función para solicitud de restablecer
     public function recuperarContrasena(){
-        $email=$_GET['email'];
-        require_once '../../models/user.php';
+        require_once 'configController.php';
+        $oConfig=new config();
+        //se genera un codigo para la recuperación del usuario
+        $codigo=$oConfig->generarCodigo36();
+        require_once '../models/user.php';
         $oUser=new user();
         //se verifica si el correo electronico existe
+        $email=$_POST['email'];
         $emailExiste=$oUser->checkEmail($email);
         if(sizeof($emailExiste)==0){
             echo "el correo electronico no está registrado";
         }else{
             //el correo electronico existe
-            require_once 'configController.php';
+            require_once 'mensajeController.php';
+            $oMensaje= new mensaje();
+            $oMensaje->enviarCorreoSolicitudContrasena($email,$codigo);
+            //se registra la solicitud de contraseña
+            require_once '../models/recuperacionContrasena.php';
+            $oRecuperacion=new recuperacionContrasena();
+            $oRecuperacion->email=$email;
+            $oRecuperacion->codigo=$codigo;
+            $oRecuperacion->habilitado=TRUE;
+            // $oRecuperacion->fechaRecuperacion=date("Y-m-d H:i:s");
+            $result=$oRecuperacion->registrarRecuperacionContrasena();
+            if($result) echo "se registró correctamente";
+            else echo "error al registrar";
             
+
+        }
+    }
+    //función para restablecer la contraseña
+    public function restablecerContrasena(){
+        require_once '../modelo/recuperacionContrasena.php';
+        $oRecuperacion=new recuperacionContrasena();
+        $oRecuperacion->email=$_GET['email'];
+        $oRecuperacion->codigo=$_GET['codigo'];
+        if($oRecuperacion->verificarCodigo()){
+            //pendiente terminar recuperación de contraseña
         }
     }
     public function detalleRol($idRol){

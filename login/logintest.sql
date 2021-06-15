@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2021 a las 05:22:08
+-- Tiempo de generación: 15-06-2021 a las 17:52:07
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -40,7 +40,9 @@ CREATE TABLE `modulo` (
 INSERT INTO `modulo` (`idModulo`, `nombreModulo`, `eliminado`) VALUES
 (1, 'Configuración', 0),
 (3, 'sdfsdfsd', 1),
-(4, 'Inicio', 0);
+(4, 'Inicio', 0),
+(5, 'Estudiante', 0),
+(6, 'Profesor', 0);
 
 -- --------------------------------------------------------
 
@@ -52,6 +54,7 @@ CREATE TABLE `pagina` (
   `idPagina` int(11) NOT NULL,
   `idModulo` int(11) NOT NULL,
   `nombrePagina` varchar(30) NOT NULL,
+  `url` varchar(100) NOT NULL,
   `eliminado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -59,12 +62,16 @@ CREATE TABLE `pagina` (
 -- Volcado de datos para la tabla `pagina`
 --
 
-INSERT INTO `pagina` (`idPagina`, `idModulo`, `nombrePagina`, `eliminado`) VALUES
-(2, 1, 'Perfil', 0),
-(3, 1, 'Rol', 0),
-(4, 1, 'Modulos', 0),
-(5, 4, 'Pagina Inicial', 0),
-(6, 4, 'Acerca de', 0);
+INSERT INTO `pagina` (`idPagina`, `idModulo`, `nombrePagina`, `url`, `eliminado`) VALUES
+(2, 1, 'Perfil', '', 0),
+(3, 1, 'Rol', '', 0),
+(4, 1, 'Modulos', '', 0),
+(5, 4, 'Pagina Inicial', '', 0),
+(6, 4, 'Acerca de', '', 0),
+(7, 6, 'inicio', '', 0),
+(8, 6, 'Acerca de', '', 0),
+(9, 6, 'Listar Profesor', '', 0),
+(10, 6, 'Nuevo Profesor', '', 0);
 
 -- --------------------------------------------------------
 
@@ -77,6 +84,30 @@ CREATE TABLE `permiso` (
   `idModulo` int(11) NOT NULL,
   `idPagina` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recuperacioncontrasena`
+--
+
+CREATE TABLE `recuperacioncontrasena` (
+  `idRecuperacion` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `codigoRecuperacion` char(36) NOT NULL,
+  `habilitado` int(11) NOT NULL,
+  `fechaRecuperacion` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `recuperacioncontrasena`
+--
+
+INSERT INTO `recuperacioncontrasena` (`idRecuperacion`, `email`, `codigoRecuperacion`, `habilitado`, `fechaRecuperacion`) VALUES
+(14, 'admin@gmail.com', 'e106ecc0-9c28-4c4f-89d8-fa9f57428adc', 1, '2021-06-15 10:34:04'),
+(15, 'admin@gmail.com', '99a4ad3b-8c81-43ea-a00a-54b11b63e21f', 1, '2021-06-15 10:42:01'),
+(16, 'admin@gmail.com', '9492304f-4582-47ee-95b0-69ef2fc2d735', 1, '2021-06-15 10:42:43'),
+(17, 'admin@gmail.com', 'b17e9f93-d4d6-43b4-bb82-33073d223704', 1, '2021-06-15 10:47:42');
 
 -- --------------------------------------------------------
 
@@ -96,7 +127,8 @@ CREATE TABLE `rol` (
 
 INSERT INTO `rol` (`idRol`, `nombreRol`, `eliminado`) VALUES
 (1, 'Administrador', 0),
-(3, 'sadasdas', 0);
+(3, 'sadasdas', 0),
+(4, 'General', 0);
 
 -- --------------------------------------------------------
 
@@ -147,6 +179,12 @@ ALTER TABLE `permiso`
   ADD KEY `idRol` (`idRol`);
 
 --
+-- Indices de la tabla `recuperacioncontrasena`
+--
+ALTER TABLE `recuperacioncontrasena`
+  ADD PRIMARY KEY (`idRecuperacion`);
+
+--
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
@@ -167,19 +205,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idModulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `pagina`
 --
 ALTER TABLE `pagina`
-  MODIFY `idPagina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPagina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `recuperacioncontrasena`
+--
+ALTER TABLE `recuperacioncontrasena`
+  MODIFY `idRecuperacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

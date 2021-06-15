@@ -1,7 +1,7 @@
 <?php
 
 class config{
-    
+    //función para generar un codigo 36 caracteres
     function generarCodigo36($data = null){
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
     $data = $data ?? random_bytes(16);
@@ -13,7 +13,7 @@ class config{
     // Output the 36 character UUID.
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
-    
+    //función para generar 
     function generarCodigoUniqid(){
         return uniqid();
     }
