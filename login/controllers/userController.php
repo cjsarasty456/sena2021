@@ -1,5 +1,4 @@
 <?php
-
 /*
 
 author: Carlos Julio Cadena Sarasty
@@ -27,7 +26,6 @@ if(isset($_GET['funcion']))
 {
     $funcion=$_GET['funcion'];
 }
-
 switch($funcion){
     case "inicioSesion":
         $email=$_POST['email'];
@@ -69,9 +67,7 @@ switch($funcion){
         return $oUser->registrarPagina();
     break;
 }
-
 class userController {
-    
 //Sección gestión usuario
 
     //función para consultar el rol del usuario 
@@ -189,12 +185,27 @@ class userController {
     }
     //función para restablecer la contraseña
     public function restablecerContrasena(){
-        require_once '../modelo/recuperacionContrasena.php';
+        require_once '../models/recuperacionContrasena.php';
         $oRecuperacion=new recuperacionContrasena();
         $oRecuperacion->email=$_GET['email'];
         $oRecuperacion->codigo=$_GET['codigo'];
         if($oRecuperacion->verificarCodigo()){
             //pendiente terminar recuperación de contraseña
+                require_once 'configController.php';
+                $oConfig=new config();
+                //se genera un codigo para la recuperación del usuario
+                $password=$oConfig->generarCodigoUniqid();
+                require_once '../models/user.php';
+                $oUser=new user();
+                if($oUser->restablecerContrasena($oRecuperacion->email,$password)){
+                    require_once 'mensajeController.php';
+                    $oMensaje=new mensaje();
+                    $oMensaje->enviarCorreoRestablecerContrasena($oRecuperacion->email,$password);
+                    header("Location: ../views/user/login.php");
+
+                }else{
+                    echo "error al actualizar la contraseña";
+                }
         }
     }
     public function detalleRol($idRol){
@@ -401,5 +412,4 @@ class userController {
         }
 //fin Sección
 }
-
 ?>

@@ -84,6 +84,14 @@ require_once 'conexiondb.php';
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
             return $result;
         }
+        public function restablecerContrasena($email,$password){
+            $password=md5($password);
+            $sql="UPDATE usuario SET contrasena='$password', resetContrasena=true WHERE correoElectronico='$email'";
+            //se ejecuta la consulta
+            $result=mysqli_query($this->getConexion(),$sql);
+            //$result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+            return $result;
+        }
 
     }
 ?>

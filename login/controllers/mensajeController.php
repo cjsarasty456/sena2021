@@ -45,27 +45,32 @@ class mensaje{
         // $correoDestino="cjsarasty@gmail.com";
         // $asunto="Asunto Correo de prueba";
         // $mensaje="Cuerpo del mensaje del correo prueba";
-        $header="From: correoOrigen@gmail.com"."\r\n ";
-        $header.="Reply-To: correoOrigen@gmail.com"."\r\n";
+        $header='MIME-Version: 1.0' . "\r\n";
+        $header.='Content-type: text/html; charset=utf-8' . "\r\n";
+        $header.="From: info@calichesoftware.com"."\r\n ";
+        $header.="Reply-To: info@calichesoftware.com"."\r\n";
         $header.="X-Mailer: PHP/".phpversion();
-        $mail=mail($correoDestino,$asunto,$mensaje,$header);
+        $cuerpoMensaje="<html>";
+        $cuerpoMensaje.="<body>$mensaje</body>";
+        $cuerpoMensaje.="</html>";
+        $mail=mail($correoDestino,$asunto,$cuerpoMensaje,$header);
         if($mail) echo "Se envió correctamente";
         else echo "error al enviar";
     }
 
     public function enviarCorreoSolicitudContrasena($correoDestino,$codigo){
         $asunto="Solicitud Cambio de contraseña";
-        $mensaje="Ingrese al siguiente enlace para restablecer la contraseña \n\r";
+        $mensaje="Ingrese al siguiente enlace para restablecer la contraseña <br>";
         $url=$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."?funcion=restablecerContrasena&email=$correoDestino&codigo=$codigo";
-        $mensaje.=$url."\n\r";
+        $mensaje.="<a href='".$url."'>Click acá para restablecer la contraseña</a>";
         $this->enviarCorreo($asunto,$mensaje,$correoDestino);
         // echo $url;   
     }
 
     public function enviarCorreoRestablecerContrasena($correoDestino,$contrasena){
         $asunto="Solicitud Cambio de contraseña";
-        $mensaje="Ingrese al siguiente enlace para restablecer la contraseña \n\r";
-        $mensaje.="Contraseña: "$contrasena."\n\r";
+        $mensaje="Ingrese al siguiente enlace para restablecer la contraseña <br>";
+        $mensaje.="Contraseña: ".$contrasena."<br>";
         $mensaje.="Recuerde cambiar la contraseña al siguiente inicio\n\r";
         $this->enviarCorreo($asunto,$mensaje,$correoDestino);
     }

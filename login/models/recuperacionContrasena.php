@@ -33,14 +33,14 @@ require_once 'conexiondb.php';
         public function verificarCodigo(){
             //se genera la consulta para verificar si el codigo y el correo electronico existe
             $sql="SELECT * FROM recuperacioncontrasena 
-                WHERE email='$this->email' and codigoRecuperacion='$this->codigo' and habilitado=TRUE";
+                WHERE email='$this->email' and codigoRecuperacion='$this->codigo' and habilitado=true";
             //se ejecuta la sentencia
             $result=mysqli_query($this->getConexion(),$sql);
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
             if(sizeof($result)>0){
                 //se genera la consulta para verificar si el codigo y el correo electronico existe
                 $sql="UPDATE recuperacioncontrasena SET habilitado=FALSE
-                    WHERE email='$email' and codigoRecuperacion='$codigo' and habilitado=TRUE";
+                    WHERE email='$this->email' and codigoRecuperacion='$this->codigo' and habilitado=TRUE";
                 //se ejecuta la sentencia
                 $result=mysqli_query($this->getConexion(),$sql);
                 return $result;
