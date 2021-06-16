@@ -1,5 +1,6 @@
 <?php
 $requiereSesion=true;
+$idPagina=5;
 require_once '../head.php';
 ?>
     <!-- Content Header (Page header) -->

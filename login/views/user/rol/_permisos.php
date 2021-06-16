@@ -5,7 +5,7 @@
   // $listaPaginas=$oUser->ObtenerPaginasModulo($idModulo);
 ?>
 <h5><i class="fas fa-window-maximize"></i> Paginas de permiso</h5>
-<form action="../../controllers/userController.php" method="get">
+<form action="../../controllers/userController.php" method="POST">
   <button type="submit" class="btn btn-success" name="funcion" value="actualizarPermisos">
     <i class="fas fa-save"></i> Actualizar permisos 
   </button>

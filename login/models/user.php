@@ -53,6 +53,7 @@ require_once 'conexiondb.php';
             foreach($result as $registro){
                 //se registra la consulta en los parametros
                 $this->idUser=$registro['idUser'];
+                // $this->idRol=$registro['idRol'];
                 $this->name=$registro['nombre'];
                 return true;
             }

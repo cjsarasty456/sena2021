@@ -1,5 +1,6 @@
 <?php
 $requiereSesion=true;
+$idPagina=15;
 require_once '../head.php';
 ?>
 <div class="card card-primary card-outline">

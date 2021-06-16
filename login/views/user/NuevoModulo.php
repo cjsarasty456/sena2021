@@ -1,6 +1,7 @@
 <!-- Esta pagína permite crear un nuevo rol -->
 <?php
 $requiereSesion=true;
+$idPagina=13;
 require_once '../head.php';
 // require_once '../../controllers/UserController.php';
 ?>

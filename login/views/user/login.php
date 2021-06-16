@@ -35,7 +35,7 @@ require_once "../../config/config.php";
         <p style="color:#FE2D00;">
         <?php
         // require_once '../../controllers/UserController.php';
-          if(isset($_GET['tituloMensaje'])!=""){ 
+          if(isset($_GET['tituloMensaje'])){ 
             require_once '../../controllers/mensajeController.php';
             $oMensaje=new  mensaje();
             $tituloMensaje=$_GET['tituloMensaje'];

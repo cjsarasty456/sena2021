@@ -1,5 +1,6 @@
 <?php
 $requiereSesion=true;
+$idPagina=11;
 require_once '../head.php';
 require_once '../../controllers/userController.php';
 $idRol=$_GET['idRol'];

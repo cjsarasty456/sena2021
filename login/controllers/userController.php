@@ -87,6 +87,7 @@ class userController {
             // echo "inicio correcto";
             //se crea la variable de sesión para almacenar el idUser y nombre del usuario para acceder a el en cualquier página
             $_SESSION["idUser"]=$oUser->getIdUser();
+            // $_SESSION["idRol"]=$oUser->getIdUser();
             $_SESSION["nameUser"]=$oUser->getNameUser();
             //se redirige a la página principal
             header("Location: ../views/home/index.php");
@@ -224,7 +225,35 @@ class userController {
     public function actualizarPermisos(){
         $idRol=$_POST['idRol'];
         $idPaginas=$_POST['idPaginas'];
-
+        require_once '../models/permiso.php';
+        $oPermiso=new permiso();
+        $oPermiso->idRol=$idRol;
+        $oPermiso->eliminarPorRolPermisos();
+        foreach($idPaginas as $idPagina){
+            require_once '../models/pagina.php';
+            $oPagina=new pagina();
+            $oPagina->idPagina=$idPagina;
+            $oPagina->obtenerPagina();
+            $oPermiso->idModulo=$oPagina->idModulo;
+            $oPermiso->idPagina=$idPagina;
+            $oPermiso->registroPermiso();
+        }
+        header("Location: ../views/user/detalleRol.php?idRol=$idRol");
+        die();
+    }
+    //función para verficar si el usuario tiene permiso para cargar la página
+    public function verificarPermiso($idPagina){
+        //obtener Rol del usuario que inició sesión
+        require_once '../../models/user.php';
+        $oUser=new user();
+        $idRol=$oUser->getRolUser($_SESSION["idUser"]);
+        //verificar permisos del usuario
+        require_once '../../models/permiso.php';
+        $oPermiso=new permiso();
+        $oPermiso->idRol=$idRol;
+        $oPermiso->idPagina=$idPagina;
+        if(sizeof($oPermiso->verificarPermiso())==0)
+            header("Location: ../error/401.php");
     }
 //fin sección
 //sección roles

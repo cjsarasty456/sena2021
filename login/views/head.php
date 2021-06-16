@@ -1,6 +1,7 @@
 <?php
 // require_once "../../config/config.php";
 require_once '../../controllers/mensajeController.php';
+require_once '../../controllers/userController.php';
 
 // $oConfig=new config();
     session_start();
@@ -9,6 +10,10 @@ require_once '../../controllers/mensajeController.php';
         // echo "requiere iniciar";
         header("Location: ../../views/user/login.php");
         die();
+    }elseif($requiereSesion and isset($_SESSION['idUser'])){
+        //inició sesión
+        $oUserController=new userController();
+        $oUserController->verificarPermiso($idPagina);
     }
 ?>
 
