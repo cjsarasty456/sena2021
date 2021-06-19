@@ -31,9 +31,10 @@
                           ?>
                             <tr>
                               <td>
-                              <input id="check<?php echo $registroPagina['idPagina'] ?>" type="checkbox" name="idPaginas[]"  value="<?php echo $registroPagina['idPagina'] ?>">
+                                <input type="checkbox" name="idPaginas[]" value="<?php echo $registroPagina['idPagina']; ?>"
+                                <?php if($registroPagina['idRol']==$idRol) echo "checked"; ?>>
                                 <label for="check<?php echo $registroPagina['idPagina'] ?>"> 
-                                <?php echo $registroPagina['nombrePagina']; ?>
+                                  <?php echo $registroPagina['nombrePagina']; ?>
                                 </label>
                               </td>
                             </tr>

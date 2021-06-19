@@ -33,6 +33,17 @@ class permiso extends conexiondb{
         $result=mysqli_query($this->getConexion(),$sql);
         return $result;
     }
+    
+    public function ConsultarListaPaginasModuloMenu(){
+        //consulta para traer la información de los roles
+        $sql="SELECT * FROM permiso per RIGHT JOIN pagina pag ON pag.idPagina=per.idPagina 
+        WHERE per.idModulo=$this->idModulo AND per.idRol=$this->idRol AND pag.menu=true AND pag.eliminado=false";
+        //se ejecuta la consulta
+        $result=mysqli_query($this->getConexion(),$sql);
+        //se organiza el resultado de la consulta en un arreglo asociativo para buscar usando como indice el nombre de cada campo
+        $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+        return $result;
+    }
 
     public function verificarPermiso(){
         $sql="SELECT * FROM permiso WHERE idRol=$this->idRol AND idPagina=$this->idPagina";

@@ -408,6 +408,26 @@ class userController {
         return $oPagina->ConsultarListaPaginasModulo();
     }
 
+    //consultar lista pagina por modulo
+    public function ConsultarListaPaginasModuloMenu($idModulo){
+        require_once '../../models/user.php';
+        $oUser=new user();
+        $idRol=$oUser->getRolUser($_SESSION["idUser"]);
+        $oMensaje=new mensaje();
+        require_once '../../models/permiso.php';          
+        $oPermiso=new permiso();
+        $oPermiso->idModulo=$idModulo;
+        $oPermiso->idRol=$idRol;
+        return $oPermiso->ConsultarListaPaginasModuloMenu();
+    }
+
+    public function obtenerPagina($idPagina){
+        require_once '../../models/pagina.php';
+        $oPagina= new pagina();
+        $oPagina->obtenerPagina($idPagina);
+        return $oPagina;
+    }
+
         //función para registrar la página
         public function registrarPagina(){
             $oMensaje=new mensaje();
@@ -416,6 +436,7 @@ class userController {
             $oPagina->idPagina=$_POST['idPagina'];
             $oPagina->idModulo=$_POST['idModulo'];
             $oPagina->nombrePagina=$_POST['nombrePagina'];
+            $oPagina->url=$_POST['url'];
             if($oPagina->registrarPagina()){
                 $tituloMensaje="Excelente";
                 $tipoMensaje=$oMensaje->tipoCorrecto;
@@ -430,9 +451,9 @@ class userController {
             }else{
                 $tituloMensaje="Error";
                 $tipoMensaje=$oMensaje->tipoPeligo;
+                $url="../views/user/NuevaPagina.php";
                 if($oPagina->idPagina==""){
                     $mensaje="Error al crear la página";
-                    $url="../views/user/NuevaPagina.php";
                 }else{
                     $mensaje="Error al editar la página";
                 }

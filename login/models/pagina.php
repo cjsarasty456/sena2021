@@ -21,16 +21,16 @@ class pagina extends conexiondb{
     //función que consulta del rol por el idRol
     public function ConsultarListaPaginasModulo(){
         //consulta para traer la información de los roles
-        $sql="SELECT * FROM pagina WHERE idModulo=$this->idModulo";
+        $sql="SELECT 
+        pag.idPagina,pag.idModulo,pag.nombrePagina,pag.url,
+        per.idRol
+         FROM pagina pag LEFT JOIN permiso per on pag.idPagina=per.idPagina 
+         WHERE pag.idModulo=$this->idModulo AND pag.eliminado=false";
         //se ejecuta la consulta
         $result=mysqli_query($this->getConexion(),$sql);
         //se organiza el resultado de la consulta en un arreglo asociativo para buscar usando como indice el nombre de cada campo
         $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
         return $result;
-        // foreach($result as $registro){
-        //     $this->idRol=$registro['idRol'];
-        //     $this->nombreRol=$registro['nombreRol'];
-        // }
     }
 
     //función para obtener pagina del modulo
@@ -54,9 +54,9 @@ class pagina extends conexiondb{
     //función para registrar las paginas
     public function registrarPagina(){
         if($this->idPagina!="")
-        $sql="UPDATE pagina SET nombreRol='$this->nombreRol' WHERE idRol=$this->idPagina";
+        $sql="UPDATE pagina SET nombrePagina='$this->nombrePagina', url='$this->url' WHERE idPagina=$this->idPagina";
         else
-        $sql="INSERT INTO pagina (idModulo,nombrePagina,eliminado) VALUES ($this->idModulo,'$this->nombrePagina',false)";
+        $sql="INSERT INTO pagina (idModulo,nombrePagina,url,eliminado) VALUES ($this->idModulo,'$this->nombrePagina','$this->url',false)";
         //se ejecuta la consulta
         $result=mysqli_query($this->getConexion(),$sql);
         return $result;

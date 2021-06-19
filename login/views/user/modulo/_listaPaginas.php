@@ -10,7 +10,10 @@ $listaRegistros=$oUserController->ObtenerPaginasModulo($idModulo);
 <table class="table table-bordered table-hover">
     <thead>
         <th>
-            Usuario
+            Nombre Página
+        </th>
+        <th>
+          Url
         </th>
         <th>
         <a href="NuevaPagina.php?idModulo=<?php echo $idModulo; ?>" class="btn btn-success"><i class="far fa-plus-square"></i> Agregar Página</a>
@@ -21,9 +24,13 @@ $listaRegistros=$oUserController->ObtenerPaginasModulo($idModulo);
     <?php foreach($listaRegistros as $registro){ ?>
     <tr>
         <td><?php echo $registro['nombrePagina']; ?></td>
+        <td><?php echo $registro['url']; ?></td>
         <td>
+            <a href="editarPagina.php?idPagina=<?php echo $registro['idPagina']; ?>" class="btn btn-warning">
+              <i class="fas fa-edit"></i>
+            </a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-Eliminar">
-                <i class="fas fa-trash-alt"></i> Eliminar Página
+                <i class="fas fa-trash-alt"></i>
             </button>
         </td>
     </tr>

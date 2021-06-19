@@ -17,12 +17,16 @@ require_once '../head.php';
     </div>
     <!-- contenido de la pagina -->
     <form action="../../controllers/userController.php" method="post">
+        <input type="hidden" name="idModulo" value="<?php echo $_GET['idModulo']; ?>">
+        <input type="hidden" name="idPagina">
         <div class="row">
-            <div class="col">
+            <div class="col col-xl-6">
                 <label for="">Nombre Página</label>
-                <input type="hidden" name="idPagina">
-                <input type="hidden" name="idModulo" value="<?php echo $_GET['idModulo']; ?>">
                 <input class="form-control" name="nombrePagina" type="text" placeholder="Ingrese el nombre de la pagina">
+            </div>
+            <div class="col col-xl-6">
+                <label for="">Url</label>
+                <input type="text" class="form-control" name="url">
             </div>
         </div>
         <br>

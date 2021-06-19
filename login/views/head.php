@@ -86,52 +86,41 @@ require_once '../../controllers/userController.php';
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
-              <p>
-                Inicio
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../home/index.php" class="nav-link">
+          <?php 
+            require_once '../../controllers/userController.php';
+            $oUserController=new userController();
+            $listaModulo=$oUserController->ConsultarListaModulos();
+            foreach($listaModulo as $modulo){
+          ?>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pagina Inicial</p>
-                </a>
-                <a href="../home/acercaDe.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Acerca de</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-            <i class="fas fa-users-cog"></i>
-              <p>
-                Configuración
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../user/user.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Perfil</p>
-                </a>
-                <a href="../user/listaRoles.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Roles</p>
-                </a>
-                <a href="../user/listaModulo.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Modulos</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+                  <?php echo $modulo['nombreModulo']; ?>
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <?php
+                $listaPagina=$oUserController->ConsultarListaPaginasModuloMenu($modulo['idModulo']);
+                foreach($listaPagina as $pagina){
+                  ?>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="<?php echo "/sena/login/views/".$pagina['url']; ?>" class="nav-link">
+                        <!-- <a href="..<?php echo $pagina['url']; ?>" class="nav-link"> -->
+                          <i class="far fa-circle nav-icon"></i>
+                          <p><?php echo $pagina['nombrePagina']; ?></p>
+                        </a>
+                      </li>
+                    </ul>                
+                  <?php
+                }
+              ?>
+            </li>
+              
+          <?php
+            }
+          ?>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
