@@ -232,8 +232,8 @@ class userController {
         foreach($idPaginas as $idPagina){
             require_once '../models/pagina.php';
             $oPagina=new pagina();
-            $oPagina->idPagina=$idPagina;
-            $oPagina->obtenerPagina();
+            // $oPagina->idPagina=$idPagina;
+            $oPagina->obtenerPagina($idPagina);
             $oPermiso->idModulo=$oPagina->idModulo;
             $oPermiso->idPagina=$idPagina;
             $oPermiso->registroPermiso();
@@ -242,7 +242,32 @@ class userController {
         die();
     }
     //función para verficar si el usuario tiene permiso para cargar la página
-    public function verificarPermiso($idPagina){
+    public function verificarPermiso($idPagina, $idRol){
+        //verificar permisos del usuario
+        require_once '../../models/permiso.php';
+        $oPermiso=new permiso();
+        $oPermiso->idRol=$idRol;
+        $oPermiso->idPagina=$idPagina;
+        if(sizeof($oPermiso->verificarPermiso())>0)
+            return true;
+            else
+            return false;
+        
+    }
+    public function verificarPermisoPagina($idPagina){
+        //obtener Rol del usuario que inició sesión
+        require_once '../../models/user.php';
+        $oUser=new user();
+        $idRol=$oUser->getRolUser($_SESSION["idUser"]);
+        //verificar permisos del usuario
+        require_once '../../models/permiso.php';
+        $oPermiso=new permiso();
+        $oPermiso->idPagina=$idPagina;
+        if(sizeof($oPermiso->verificarPermisoPagina())==0)
+            header("Location: ../error/401.php");
+    }
+    //función para verficar si el usuario tiene permiso para cargar la página
+    public function verificarPermisoUrl($url){
         //obtener Rol del usuario que inició sesión
         require_once '../../models/user.php';
         $oUser=new user();
@@ -251,8 +276,8 @@ class userController {
         require_once '../../models/permiso.php';
         $oPermiso=new permiso();
         $oPermiso->idRol=$idRol;
-        $oPermiso->idPagina=$idPagina;
-        if(sizeof($oPermiso->verificarPermiso())==0)
+        $oPermiso->url=$url;
+        if(sizeof($oPermiso->verificarPermisoUrl())==0)
             header("Location: ../error/401.php");
     }
 //fin sección
@@ -401,11 +426,10 @@ class userController {
 
     //consultar lista pagina por modulo
     public function ObtenerPaginasModulo($idModulo){
-        $oMensaje=new mensaje();
+        // $oMensaje=new mensaje();
         require_once '../../models/pagina.php';          
         $oPagina=new pagina();
-        $oPagina->idModulo=$idModulo;
-        return $oPagina->ConsultarListaPaginasModulo();
+        return $oPagina->ConsultarListaPaginasModulo($idModulo);
     }
 
     //consultar lista pagina por modulo

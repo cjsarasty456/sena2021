@@ -32,7 +32,7 @@
                             <tr>
                               <td>
                                 <input type="checkbox" name="idPaginas[]" value="<?php echo $registroPagina['idPagina']; ?>"
-                                <?php if($registroPagina['idRol']==$idRol) echo "checked"; ?>>
+                                <?php if($oUser->verificarPermiso($registroPagina['idPagina'], $idRol)) echo "checked"; ?>>
                                 <label for="check<?php echo $registroPagina['idPagina'] ?>"> 
                                   <?php echo $registroPagina['nombrePagina']; ?>
                                 </label>

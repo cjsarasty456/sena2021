@@ -16,6 +16,7 @@ class permiso extends conexiondb{
     public $idRol="";
     public $idModulo="";
     public $idPagina="";
+    public $url="";
 
     //función registrar el permiso de pagina
     public function registroPermiso(){
@@ -47,6 +48,15 @@ class permiso extends conexiondb{
 
     public function verificarPermiso(){
         $sql="SELECT * FROM permiso WHERE idRol=$this->idRol AND idPagina=$this->idPagina";
+        $result=mysqli_query($this->getConexion(),$sql);
+        $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+        return $result;       
+    }
+
+    public function verificarPermisoUrl(){
+        $sql="SELECT * FROM permiso per 
+        INNER JOIN pagina pag on per.idPagina=pag.idPagina 
+        WHERE per.idRol=$this->idRol AND pag.url='$this->url'";
         $result=mysqli_query($this->getConexion(),$sql);
         $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
         return $result;       

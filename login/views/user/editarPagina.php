@@ -1,6 +1,6 @@
 <?php
 $requiereSesion=true;
-$idPagina=19;
+$idPagina=18;
 require_once '../head.php';
 
 require_once '../../controllers/userController.php';

@@ -2,6 +2,7 @@
 $requiereSesion=true;
 $idPagina=5;
 require_once '../head.php';
+
 ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -22,10 +23,10 @@ require_once '../head.php';
     <!-- /.content-header -->
 
 <div class="container">
-
+<!-- <?php echo $_SERVER['REQUEST_URI']; ?> -->
 <!-- contenido de la pagina -->
     <h1>Bienvenido al ejercicio de login</h1>
-
+    
     <p>Esta aplicación diseñada como ejemplo contiene las siguientes características</p>
     <h3>En la sección de configuración</h3>
     <ul>

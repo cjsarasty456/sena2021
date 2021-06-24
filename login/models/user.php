@@ -29,7 +29,7 @@ require_once 'conexiondb.php';
         }
         //función para obtener el rol del usuario
         public function getRolUser($idUser){
-            $sql="SELECT * FROM usuario WHERE idRol=$idUser";
+            $sql="SELECT * FROM usuario WHERE idUser=$idUser";
             //se ejecuta la consulta
             $result=mysqli_query($this->getConexion(),$sql);
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);

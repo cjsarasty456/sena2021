@@ -6,7 +6,7 @@ class conexiondb{
     //variable $servidor indica donde está ubicada la base de datos
     private $servidor="localhost";
     //variable $baseDatos almace el nombre de la base de datos
-    private $baseDatos="logintest";
+    private $baseDatos="login";
     //variable $usuario almacena el usuario que tiene acceso a la base datos
     private $usuario="root";
     // variable $contrasena almacena la contraseña del usuario

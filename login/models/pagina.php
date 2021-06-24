@@ -19,13 +19,12 @@ class pagina extends conexiondb{
     public $eliminar="";
 
     //función que consulta del rol por el idRol
-    public function ConsultarListaPaginasModulo(){
+    public function ConsultarListaPaginasModulo($idModulo){
         //consulta para traer la información de los roles
         $sql="SELECT 
-        pag.idPagina,pag.idModulo,pag.nombrePagina,pag.url,
-        per.idRol
-         FROM pagina pag LEFT JOIN permiso per on pag.idPagina=per.idPagina 
-         WHERE pag.idModulo=$this->idModulo AND pag.eliminado=false";
+        *
+         FROM pagina pag 
+         WHERE  pag.idModulo=$idModulo AND pag.eliminado=false";
         //se ejecuta la consulta
         $result=mysqli_query($this->getConexion(),$sql);
         //se organiza el resultado de la consulta en un arreglo asociativo para buscar usando como indice el nombre de cada campo
@@ -34,9 +33,9 @@ class pagina extends conexiondb{
     }
 
     //función para obtener pagina del modulo
-    public function obtenerPagina(){
+    public function obtenerPagina($idPagina){
         //consulta para traer la información de los roles
-        $sql="SELECT * FROM pagina WHERE idPagina=$this->idPagina";
+        $sql="SELECT * FROM pagina WHERE idPagina=$idPagina";
         //se ejecuta la consulta
         $result=mysqli_query($this->getConexion(),$sql);
         //se organiza el resultado de la consulta en un arreglo asociativo para buscar usando como indice el nombre de cada campo
