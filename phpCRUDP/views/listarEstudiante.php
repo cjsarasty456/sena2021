@@ -14,7 +14,36 @@ if(isset($_GET['mensaje'])){
   echo $oMensaje->mostrarMensaje($_GET['tipoMensaje'],$_GET['mensaje']);
 }
 ?>
-<!-- etiqueta para crear la tabla -->
+<?php
+    //se hace referencia a los archivos estudiante y conexiondb
+    require_once '../modelo/estudiante.php';
+    require_once '../modelo/conexiondb.php';
+    //se instancia el objeto estudiante
+    $oEstudiante=new estudiante();
+    //se llama la función ListarEstudiantes y se almacena
+    //el valor en la variable $Consulta
+    if(isset($_GET['page'])) $pagina=$_GET['page'];
+    else $pagina=1;
+    $Consulta=$oEstudiante->ListarEstudiantes($pagina);
+    $numeroRegistro=$oEstudiante->numRegistro;
+    $numPagina=intval($numeroRegistro/10);
+    if(fmod($numeroRegistro,10)>0)$numPagina++;
+    echo $numPagina;
+    ?>
+    <div class="card-tools">
+      <ul class="pagination pagination-sm float-right">
+      <li class="page-item"><a class="page-link" href="listarEstudiante.php?page=<?php echo 1; ?>">&laquo;</a></li>
+        <?php
+          for($i=1;$i<=$numPagina;$i++){
+        ?>
+        <li class="page-item"><a class="page-link" href="listarEstudiante.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+        <?php
+          }
+        ?>
+         <li class="page-item"><a class="page-link" href="listarEstudiante.php?page=<?php echo $numPagina; ?>">&raquo;</a></li>
+      </ul>
+    </div>
+<!-- etiqueta para 0crear la tabla -->
 <table class="table">
     <!-- etiqueta el encabezado de la tabla -->
     <thead>
@@ -29,15 +58,7 @@ if(isset($_GET['mensaje'])){
         </tr>
     </thead>
     <tbody>
-        <?php
-        //se hace referencia a los archivos estudiante y conexiondb
-        require_once '../modelo/estudiante.php';
-        require_once '../modelo/conexiondb.php';
-        //se instancia el objeto estudiante
-        $oEstudiante=new estudiante();
-        //se llama la función ListarEstudiantes y se almacena
-        //el valor en la variable $Consulta
-        $Consulta=$oEstudiante->ListarEstudiantes();
+      <?php
         $enlace="../eliminarEstudiante.php?id=";
         foreach($Consulta as $registro){
             ?>

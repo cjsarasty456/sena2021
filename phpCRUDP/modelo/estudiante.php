@@ -13,6 +13,7 @@ class estudiante{
     public $apellido="";
     public $direccion="";
     public $telefono="";
+    public $numRegistro=0;
 
 //esta función crea un nuevo registro de estudiante
     function nuevoEstudiante(){
@@ -22,19 +23,27 @@ class estudiante{
         $conexion=$oConexion->conexion();
         //sentencia SQL para instertar estudiante
         $sql="INSERT INTO estudiante (tipoDocumento,documentoIdentidad,nombres,apellidos,direccion,telefono,eliminado)
-        VALUES ('$this->tipoDocumento','$this->documento','$this->nombre','$this->apellido','$this->direccion','$this->telefono',eliminado)";
+        VALUES ('$this->tipoDocumento','$this->documento','$this->nombre','$this->apellido','$this->direccion','$this->telefono',0)";
         $result=mysqli_query($conexion,$sql);
         return $result;
     }
     //esta función realiza una consulta a la base de datos
     //y devuelve un arreglo con los estudiantes
-    function ListarEstudiantes(){
+    function ListarEstudiantes($pagina){
         //se instancia el objeto conectar
         $oConexion=new conectar();
         //se establece conexión con la base datos
         $conexion=$oConexion->conexion();
         //se registra la consulta sql
-        $sql="SELECT * FROM estudiante WHERE eliminado=false";
+        $sql="SELECT count(tipoDocumento) as numRegistro FROM estudiante WHERE eliminado=false";
+        //se ejecuta la consulta en la base de datos
+        $result=mysqli_query($conexion,$sql);       //se registra la consulta sql
+        foreach($result as $registro){
+            $this->numRegistro=$registro['numRegistro'];
+        }
+        $inicio=(($pagina-1)*10);
+        //se registra la consulta sql
+        $sql="SELECT * FROM estudiante WHERE eliminado=false  LIMIT 10 OFFSET $inicio";
         //se ejecuta la consulta en la base de datos
         $result=mysqli_query($conexion,$sql);
         //organiza resultado de la consulta y lo retorna
