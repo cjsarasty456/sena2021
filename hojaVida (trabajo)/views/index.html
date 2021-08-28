@@ -8,39 +8,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoja de vida Carlos Julio Cadena</title>
-    <style>
-       body{
-         background-color: #ebebeb; /*esto cambia el color de fondo del body*/ 
-         font: 8pt "verdana"; /* configura la fuente: tamaño y tipo letra */
-         margin: 10 0 10 0px;
-         text-align: center;
-       }
-       .container{
-          text-align: left;
-          width: 770px;
-         margin:0;
-       }
-       .containerHeader{
-         background-color: #d0d0ff;
-         padding: 10px;
-         border-top-left-radius: 10px;
-         border-top-right-radius:10px ; /*aplica en la esquina superior derecha un redondeo*/
-         text-align: right; /* alinea la letra hacia la derecha */
-         font-size: 15pt; /* cambia el tamaño de la letra unidad de medida punto*/
-         font-weight: bold; /* aplica negrita a la letra dentro de la clase */
-         color: #333300;
-       }
-       img{
-         border-radius: 50%; 
-         width: 100px;
-         height: 100px;
-       }
-    </style>
+   <style>
+      /* En esta sección podemos agregar estilos a toda la pagina */
+      /* en el selector se puede llamar directamente la etiqueta */
+      h1{
+         color: rgb(70, 31, 31);
+         /* Atributo color nos permite seleccionar  */
+         /* se puede utilizar colores en ingles white */
+         /* colores hexadecimales ej: #ffffff */
+         /* colores rgb(255, 255, 255) */
+         font-family: 'Times New Roman';
+      }
+      /* Selector .ClassName se utiliza para llamar */
+      /* dar estilo a los elemento que tengan la clase definida */
+      /* ejemplo: .imagnePerfil */
+      .imagenPerfil{
+           width: 200px;
+           height: auto;
+           border-radius: 50%;
+           
+        }
+        body { 
+           /* font permite modificar la fuente de la letras*/
+           font: 8pt Verdana, Geneva, Arial, Helvetica, sans-serif; 
+           /* Define el margen del contenedor */
+           margin: 10 0 10 0px; 
+           /* Organiza los elementos al centro */
+           text-align: center; 
+           background-color: #808080; 
+           /* background-image: url("assets/image/imagen1.jpg"); */
+        }
+        #container{
+           text-align: left;
+           width: 770px;
+           margin: auto;
+        }
+        .containerHeader{
+           /* cambiar el color letra */
+           color: #333300;
+           /* cambia el tamaño de la letra */
+           font-size: 12pt;
+           /* define el tipo de letra */
+           font-family: Arial;
+           /* define un espcio para los elementos de adentro del contenedor */
+           padding: 10px;
+           /* alinea el texto a la derecha */
+           text-align: right;
+           /* Define negrita a la letra */
+           font-weight: bold;
+           /* selecciona un color de fondo */
+           background-color: #d0d0ff; 
+        }
+        .containerLateral{
+         background-color: rgb(185, 240, 194);
+        }
+   </style>
 </head>
 <body>
    <!-- clase contenedor -->
    <!-- incluye el contenido de la pagina -->
-   <div class="container">
+   <div id="container">
       <!-- contenedor de la cabecera -->
       <!-- va a contener el nombre del usuario -->
       <div class="containerHeader">
@@ -55,7 +82,7 @@
                <!-- etiqueta para agregar una imagen -->
                <!-- atributo src= indica donde esta ubicada -->
                <!-- imagen -->
-               <img src="assets/imagen/foto.jpg" alt="">
+               <img class="imagenPerfil" src="../assets/image/foto.jpg" alt="">
             </div>
             <div class="containerLateral">
                <!-- titulo -->
@@ -135,9 +162,18 @@
                   <!-- Fin Tbody -->
                </table>
                <!-- fin etiqueta table -->
-
-               <video src="assets/video/video.mp4" autoplay controls></video>
-
+               <h3>Video</h3>
+               <video src="../assets/video/video.mp4" autoplay controls></video>
+               <h3>Imagenes</h3>
+               <!-- atributo style permite agregar estilos a la etiqueta -->
+               <!-- width especifica el ancho elemento -->
+               <!-- height espeficia el alto -->
+               <!-- <img src="../assets/image/imagen1 (1).jpeg" style="height: 200px; width: 500px;" alt=""> -->
+               <img src="../assets/image/imagen1 (2).jpeg" alt="">
+               <img src="../assets/image/imagen1 (3).jpeg" alt="">
+               <img src="../assets/image/imagen1 (4).jpeg" alt="">               
+               <!-- etiqueta para incorporar un archivo de audio -->
+               <audio src="../assets/audio/audio.ogg" controls></audio>
             </div>
             <!-- end containerPrincipal -->
 
