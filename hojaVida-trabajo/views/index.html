@@ -22,6 +22,10 @@
       /* Selector .ClassName se utiliza para llamar */
       /* dar estilo a los elemento que tengan la clase definida */
       /* ejemplo: .imagnePerfil */
+      .containerPhoto{
+         background-color: rgb(185, 240, 194);
+         width: 210px;
+      }
       .imagenPerfil{
            width: 200px;
            height: auto;
@@ -58,9 +62,28 @@
            font-weight: bold;
            /* selecciona un color de fondo */
            background-color: #d0d0ff; 
+           border-top-left-radius: 5px;
+           border-top-right-radius: 5px;
         }
         .containerLateral{
+           /* asigna color de fondo al contenedor */
          background-color: rgb(185, 240, 194);
+         /* asigna un ancho de 200 px */
+         width: 200px;
+         /* indica que el contenedor flote a la izquierda */
+         float: left;
+         /* Asigna un espacio entre el contenedor padre y los elementos hijos */
+         padding: 5px;
+         /* asigna efecto redondeo a las esquinas inferior */
+         border-bottom-left-radius: 10px;
+         border-bottom-right-radius: 10px;
+        }
+        .containerPrincipal{
+           /* float: right; */
+           background-color: white;
+           margin-left: 210px;
+           width: 90%;
+           margin-top: -300px;
         }
    </style>
 </head>
