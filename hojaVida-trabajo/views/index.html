@@ -39,13 +39,15 @@
            margin: 10 0 10 0px; 
            /* Organiza los elementos al centro */
            text-align: center; 
-           background-color: #808080; 
+           background-color: #ebebee; 
            /* background-image: url("assets/image/imagen1.jpg"); */
         }
         #container{
            text-align: left;
            width: 770px;
            margin: auto;
+           box-shadow: 30px 30px 30px grey;
+           
         }
         .containerHeader{
            /* cambiar el color letra */
@@ -82,8 +84,19 @@
            /* float: right; */
            background-color: white;
            margin-left: 210px;
-           width: 560px;
+           width: 540px;
            margin-top: -256px;
+           padding-left: 10px;
+           padding-right: 10px;
+        }
+        video{
+           width: 100%;
+           height: auto;
+        }
+        /* afecta las etiquetas img dentro del containerPrincipal */
+        .containerPrincipal img{
+         width: 100%;
+         height: auto;
         }
    </style>
 </head>
@@ -185,9 +198,9 @@
                   <!-- Fin Tbody -->
                </table>
                <!-- fin etiqueta table -->
-               <h3>Video</h3>
+               <h1>Video</h1>
                <video src="../assets/video/video.mp4" autoplay controls></video>
-               <h3>Imagenes</h3>
+               <h1>Imagenes</h1>
                <!-- atributo style permite agregar estilos a la etiqueta -->
                <!-- width especifica el ancho elemento -->
                <!-- height espeficia el alto -->

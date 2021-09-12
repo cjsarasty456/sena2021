@@ -19,7 +19,7 @@
                 </div>
                 <hr>
                 <form action="decode.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="qrimage" accept="image/*" id="qrimage" class="form-control" required><br>
+                    <input type="file" capture="camera" name="qrimage" accept="image/*" id="qrimage" class="form-control" required><br>
                     <input type="submit" class="btn btn-md btn-block btn-info" value="Enviar datos">
                 </form>
             </div>
