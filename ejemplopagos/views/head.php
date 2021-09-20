@@ -4,18 +4,18 @@ require_once '../../controllers/mensajeController.php';
 require_once '../../controllers/userController.php';
 
 // $oConfig=new config();
-    session_start();
-    // echo $_SESSION['idUser'];
-    if($requiereSesion and !isset($_SESSION['idUser'])){
-        // echo "requiere iniciar";
-        header("Location: ../../views/user/login.php");
-        die();
-    }elseif($requiereSesion and isset($_SESSION['idUser'])){
-        //inició sesión
-        $oUserController=new userController();
-        $oUserController->verificarPermiso($idPagina);
-    }
-?>
+//     session_start();
+//     // echo $_SESSION['idUser'];
+//     if($requiereSesion and !isset($_SESSION['idUser'])){
+//         // echo "requiere iniciar";
+//         header("Location: ../../views/user/login.php");
+//         die();
+//     }elseif($requiereSesion and isset($_SESSION['idUser'])){
+//         //inició sesión
+//         $oUserController=new userController();
+//         $oUserController->verificarPermiso($idPagina);
+//     }
+// ?>
 
 <!DOCTYPE html>
 <html>

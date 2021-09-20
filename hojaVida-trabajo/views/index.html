@@ -8,97 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoja de vida Carlos Julio Cadena</title>
-   <style>
-      /* En esta sección podemos agregar estilos a toda la pagina */
-      /* en el selector se puede llamar directamente la etiqueta */
-      h1{
-         color: rgb(70, 31, 31);
-         /* Atributo color nos permite seleccionar  */
-         /* se puede utilizar colores en ingles white */
-         /* colores hexadecimales ej: #ffffff */
-         /* colores rgb(255, 255, 255) */
-         font-family: 'Times New Roman';
-      }
-      /* Selector .ClassName se utiliza para llamar */
-      /* dar estilo a los elemento que tengan la clase definida */
-      /* ejemplo: .imagnePerfil */
-      .containerPhoto{
-         background-color: rgb(185, 240, 194);
-         width: 210px;
-      }
-      .imagenPerfil{
-           width: 200px;
-           height: auto;
-           border-radius: 50%;
-           
-        }
-        body { 
-           /* font permite modificar la fuente de la letras*/
-           font: 8pt Verdana, Geneva, Arial, Helvetica, sans-serif; 
-           /* Define el margen del contenedor */
-           margin: 10 0 10 0px; 
-           /* Organiza los elementos al centro */
-           text-align: center; 
-           background-color: #ebebee; 
-           /* background-image: url("assets/image/imagen1.jpg"); */
-        }
-        #container{
-           text-align: left;
-           width: 770px;
-           margin: auto;
-           box-shadow: 30px 30px 30px grey;
-           
-        }
-        .containerHeader{
-           /* cambiar el color letra */
-           color: #333300;
-           /* cambia el tamaño de la letra */
-           font-size: 12pt;
-           /* define el tipo de letra */
-           font-family: Arial;
-           /* define un espcio para los elementos de adentro del contenedor */
-           padding: 10px;
-           /* alinea el texto a la derecha */
-           text-align: right;
-           /* Define negrita a la letra */
-           font-weight: bold;
-           /* selecciona un color de fondo */
-           background-color: #d0d0ff; 
-           border-top-left-radius: 5px;
-           border-top-right-radius: 5px;
-        }
-        .containerLateral{
-           /* asigna color de fondo al contenedor */
-         background-color: rgb(185, 240, 194);
-         /* asigna un ancho de 200 px */
-         width: 200px;
-         /* indica que el contenedor flote a la izquierda */
-         float: left;
-         /* Asigna un espacio entre el contenedor padre y los elementos hijos */
-         padding: 5px;
-         /* asigna efecto redondeo a las esquinas inferior */
-         border-bottom-left-radius: 10px;
-         border-bottom-right-radius: 10px;
-        }
-        .containerPrincipal{
-           /* float: right; */
-           background-color: white;
-           margin-left: 210px;
-           width: 540px;
-           margin-top: -256px;
-           padding-left: 10px;
-           padding-right: 10px;
-        }
-        video{
-           width: 100%;
-           height: auto;
-        }
-        /* afecta las etiquetas img dentro del containerPrincipal */
-        .containerPrincipal img{
-         width: 100%;
-         height: auto;
-        }
-   </style>
+    <!-- Para incorporar los estilos se utiliza la etiqueta link -->
+    <!-- Se agrega dentro del head -->
+    <!-- rel se utiliza para especificar una hoja de estilo -->
+    <!-- href="Donde está ubicado el archivo de estilos" -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/all.css">
 </head>
 <body>
    <!-- clase contenedor -->
@@ -131,7 +46,7 @@
                   <!-- correo electronico apenas le den click a mi enlace -->
                   <li><a href="mailto:cjcadena@sena.edu.co"> cjcadena@sena.edu.co</a></li>
                   <li>3214084743</li>
-                  <li>calle 24 # 19 - 22 San Ignacio</li>
+                  <li><i class="fas fa-map-marked-alt"></i> calle 24 # 19 - 22 San Ignacio</li>
                </ul>
                <h3>Hobbies</h3>
                <ul>
